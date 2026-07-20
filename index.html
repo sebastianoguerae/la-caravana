@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Caravana Creativa — Valoración</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<section id="key-screen" class="key-screen">
+  <div class="key-card">
+    <div class="logo" aria-hidden="true">🐘</div>
+    <h1>La Caravana Creativa</h1>
+    <p class="subtitle">Documento de valoración — acceso restringido</p>
+    <form id="key-form" autocomplete="off">
+      <label for="key-input" class="sr-only">Clave de acceso</label>
+      <input type="password" id="key-input" name="key" placeholder="Clave de acceso" autocomplete="off">
+      <button type="submit">Entrar</button>
+    </form>
+    <p id="key-error" class="key-error" hidden>Clave incorrecta. Intenta de nuevo.</p>
+  </div>
+</section>
+
+<main id="app" hidden>
+  <header class="app-header">
+    <div class="brand">
+      <span class="logo-small" aria-hidden="true">🐘</span>
+      <span class="brand-name">La Caravana Creativa</span>
+    </div>
+    <nav class="main-nav" aria-label="Secciones del documento">
+      <a href="#empresa">1. La empresa</a>
+      <a href="#foto-financiera">2. Foto financiera</a>
+      <a href="#activos">3. Activos</a>
+      <a href="#marcas-clientes">4. Marcas clientes</a>
+      <a href="#normalizacion">5. Normalización</a>
+      <a href="#valoracion">6. Valoración</a>
+      <a href="#rango-valor">7. Rango de valor</a>
+    </nav>
+  </header>
+
+  <section id="empresa" class="section"></section>
+  <section id="foto-financiera" class="section"></section>
+  <section id="activos" class="section"></section>
+  <section id="marcas-clientes" class="section"></section>
+  <section id="normalizacion" class="section"></section>
+  <section id="valoracion" class="section"></section>
+  <section id="rango-valor" class="section"></section>
+</main>
+
+<script src="js/app.js" defer></script>
+</body>
+</html>

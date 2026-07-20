@@ -1,0 +1,206 @@
+/* La Caravana Creativa — Valoración
+   Estética: memo de inversión, sobrio y oscuro, acento degradé rosa/naranja. */
+
+:root {
+  --bg: #14141a;
+  --bg-elevated: #1c1c24;
+  --border: #2c2c36;
+  --text: #eaeaef;
+  --text-muted: #9a9aa8;
+  --accent-start: #ff7eb3;
+  --accent-end: #ff9a56;
+  --gradient: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Pantalla de clave --- */
+
+.key-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.key-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.key-card .logo {
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.key-card h1 {
+  font-size: 1.4rem;
+  margin: 0 0 4px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.key-card .subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 24px;
+}
+
+#key-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#key-input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 12px 14px;
+  font-size: 1rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+#key-input:focus {
+  outline: none;
+  border-color: var(--accent-start);
+}
+
+#key-form button {
+  background: var(--gradient);
+  border: none;
+  border-radius: var(--radius);
+  color: #14141a;
+  font-weight: 600;
+  padding: 12px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#key-form button:hover {
+  opacity: 0.9;
+}
+
+.key-error {
+  color: var(--accent-start);
+  font-size: 0.85rem;
+  margin: 16px 0 0;
+}
+
+/* --- App --- */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.logo-small {
+  font-size: 1.3rem;
+}
+
+.brand-name {
+  font-weight: 600;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+
+.main-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.main-nav a:hover {
+  color: var(--text);
+}
+
+.section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  min-height: 200px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+/* --- Gate de modo: dueños vs. compradores --- */
+
+body.mode-buyer .owner-only {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .key-card {
+    padding: 32px 20px;
+  }
+
+  .app-header {
+    padding: 12px 16px;
+  }
+
+  .section {
+    padding: 32px 16px;
+  }
+}
