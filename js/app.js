@@ -35,6 +35,9 @@ function showView(mode) {
   const app = document.getElementById('app');
   if (keyScreen) keyScreen.hidden = true;
   if (app) app.hidden = false;
+
+  // Pinta las secciones 1-4 (definidas en js/render.js) tras pasar el gate.
+  if (typeof renderAll === 'function') renderAll();
 }
 
 function initKeyGate() {

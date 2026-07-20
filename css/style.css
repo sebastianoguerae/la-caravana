@@ -11,6 +11,11 @@
   --accent-end: #ff9a56;
   --gradient: linear-gradient(90deg, var(--accent-start), var(--accent-end));
   --radius: 10px;
+  /* Paleta del gráfico financiero, validada con la skill dataviz contra esta
+     superficie oscura (--bg-elevated #1c1c24): ver nota en js/render.js. */
+  --chart-bar: #d95926;
+  --chart-positive: #199e70;
+  --chart-negative: #e66767;
 }
 
 * {
@@ -189,6 +194,365 @@ body {
 
 body.mode-buyer .owner-only {
   display: none;
+}
+
+/* --- Secciones 1-4: empresa, foto financiera, activos, marcas --- */
+
+.section h2 {
+  font-size: 1.5rem;
+  margin: 0 0 12px;
+}
+
+.section h3 {
+  font-size: 1.05rem;
+  margin: 32px 0 12px;
+  color: var(--text);
+}
+
+.section-lead {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 640px;
+  margin: 0;
+}
+
+.quote-callout {
+  margin: 20px 0 28px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--accent-start);
+  font-style: italic;
+  color: var(--text);
+  background: var(--bg-elevated);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* Servicios / ciudades */
+
+.pill-grid, .badge-row {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.pill-grid .pill {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+
+.badge-row .badge {
+  border: 1px solid var(--accent-start);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+
+/* Datos básicos */
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 16px;
+  row-gap: 10px;
+  margin: 0;
+}
+
+.meta-grid dt {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.meta-grid dd {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.meta-grid a {
+  color: var(--accent-start);
+}
+
+/* Tarjetas KPI */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 24px 0 32px;
+}
+
+.kpi-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kpi-label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.kpi-value {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.kpi-value.kpi-negative {
+  color: var(--chart-negative);
+}
+
+/* Gráfico */
+
+.chart-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.chart-unit-note {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  margin: 0 0 8px;
+}
+
+.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chart-grid {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.chart-axis-zero {
+  stroke: var(--text-muted);
+  stroke-width: 1;
+}
+
+.chart-axis-label {
+  fill: var(--text-muted);
+  font-size: 11px;
+}
+
+.chart-bar {
+  fill: var(--chart-bar);
+}
+
+.chart-bar:hover, .chart-bar:focus {
+  opacity: 0.85;
+  outline: none;
+}
+
+.chart-line-segment {
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.chart-line-positive {
+  stroke: var(--chart-positive);
+}
+
+.chart-line-negative {
+  stroke: var(--chart-negative);
+}
+
+.chart-point {
+  stroke: var(--bg-elevated);
+  stroke-width: 2;
+}
+
+.chart-point-positive {
+  fill: var(--chart-positive);
+}
+
+.chart-point-negative {
+  fill: var(--chart-negative);
+}
+
+.chart-point:hover, .chart-point:focus {
+  stroke-width: 3;
+  outline: none;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.swatch-ingresos { background: var(--chart-bar); }
+.swatch-positivo { background: var(--chart-positive); }
+.swatch-negativo { background: var(--chart-negative); }
+
+.chart-tooltip {
+  position: fixed;
+  z-index: 50;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  color: var(--text);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Tablas */
+
+.table-scroll {
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+.pyg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 480px;
+}
+
+.pyg-table th, .pyg-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.pyg-table th:first-child, .pyg-table td:first-child {
+  text-align: left;
+  font-variant-numeric: normal;
+}
+
+.pyg-table thead th {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.pyg-table .pyg-total td {
+  font-weight: 600;
+  border-top: 1px solid var(--border);
+}
+
+.pyg-table td.negative {
+  color: var(--chart-negative);
+}
+
+.notes-disclosure {
+  margin: 20px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  background: var(--bg-elevated);
+}
+
+.notes-disclosure summary {
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.notes-disclosure ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Activos */
+
+.equipos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.equipo-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.equipo-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.equipo-head h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.equipo-qty {
+  color: var(--accent-end);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.equipo-card p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 8px 0 0;
+}
+
+/* Marcas */
+
+.marcas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.marca-item {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.marca-placeholder {
+  margin-top: 16px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 @media (max-width: 600px) {
