@@ -110,7 +110,7 @@ const DATA = {
       utilidad: -18737733.23,
       // Nota: esta utilidad real (-18,737,733.23) difiere de la utilidad de la serie
       // histórica para 2025 (-16,065,402.86). Ver notas.discrepancias.
-      totalPatrimonio: null, // no reportado de forma independiente en este PDF para 2025 (ver balance completo)
+      totalPatrimonio: 13588629.76, // fuente [B] p.7 "PYG COMPARATIVO DICIEMBRE 2025 2024 2.PDF"
     },
     2024: {
       // [Fuente B] Diciembre DE 2024
@@ -338,6 +338,7 @@ const DATA = {
       '2023: la utilidad de la serie histórica (19,531,126.20) no coincide con la utilidad real del PyG comparativo 2023/2022 (26,336,241.72). Se mantienen ambos valores en sus respectivos bloques sin alterarlos.',
       '2025: la utilidad de la serie histórica (-16,065,402.86) no coincide con la utilidad real del PyG comparativo 2025/2024 (-18,737,733.23). Se mantienen ambos valores en sus respectivos bloques sin alterarlos.',
       '2022: ingresos operacionales reportados como 316,780,065.00 en la serie histórica vs. 316,760,065.00 en el PyG comparativo 2023/2022 (diferencia de 20,000 COP, probable error de digitación en una de las dos fuentes).',
+      '2025: costos según serie histórica [A] $64.683.016,55 vs total costos según PyG detallado [B] $64.609.016,55 — diferencia de $74.000 entre fuentes; se mantienen ambos valores tal cual sus fuentes.',
     ],
   },
 };
