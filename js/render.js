@@ -195,7 +195,7 @@ function buildFinancieraHTML() {
     '<div class="kpi-grid">' +
       '<div class="kpi-card"><span class="kpi-label">Ingresos 2025</span>' +
         '<span class="kpi-value">' + formatCOP(y2025.ingresos) + '</span></div>' +
-      '<div class="kpi-card"><span class="kpi-label">Resultado contable 2025</span>' +
+      '<div class="kpi-card"><span class="kpi-label">Resultado contable 2025*</span>' +
         '<span class="kpi-value kpi-negative">' + formatCOP(y2025.utilidad) + '</span></div>' +
       '<div class="kpi-card"><span class="kpi-label">Pico histórico de ingresos (2019)</span>' +
         '<span class="kpi-value">' + formatCOP(y2019.ingresos) + '</span></div>' +
@@ -221,7 +221,9 @@ function buildFinancieraHTML() {
   };
   const filaLineas = Object.keys(linea2025).map(function (k) {
     const v2024 = Object.prototype.hasOwnProperty.call(linea2024, k) ? linea2024[k] : 0;
-    return '<tr><td>' + (lineaLabels[k] || k) + '</td><td>' + formatCOP(linea2025[k]) + '</td><td>' + formatCOP(v2024) + '</td></tr>';
+    const v2025Negative = linea2025[k] < 0 ? ' class="negative"' : '';
+    const v2024Negative = v2024 < 0 ? ' class="negative"' : '';
+    return '<tr><td>' + (lineaLabels[k] || k) + '</td><td' + v2025Negative + '>' + formatCOP(linea2025[k]) + '</td><td' + v2024Negative + '>' + formatCOP(v2024) + '</td></tr>';
   }).join('');
 
   const tablaLineas =

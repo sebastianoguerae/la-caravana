@@ -462,6 +462,10 @@ body.mode-buyer .owner-only {
   border-top: 1px solid var(--border);
 }
 
+.pyg-table .pyg-result td {
+  border-top: 2px solid var(--border);
+}
+
 .pyg-table td.negative {
   color: var(--chart-negative);
 }
