@@ -16,6 +16,14 @@
   --chart-bar: #d95926;
   --chart-positive: #199e70;
   --chart-negative: #e66767;
+  /* Paleta de las Secciones 5-7 (js/valuation.js), validada con la skill
+     dataviz contra esta misma superficie oscura — ver nota en js/valuation.js. */
+  --wf-total: #3987e5;
+  --wf-incremento: #199e70;
+  --wf-decremento: #e66767;
+  --rb-activos: #3987e5;
+  --rb-multiplo: #d55181;
+  --rb-dcf: #c98500;
 }
 
 * {
@@ -559,6 +567,216 @@ body.mode-buyer .owner-only {
   font-style: italic;
 }
 
+/* --- Secciones 5-7: normalización, valoración, rango de valor --- */
+
+.disclosure-note {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-start);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 10px 16px;
+  margin: 10px 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.disclosure-note strong {
+  color: var(--text);
+}
+
+/* Tarjeta KPI grande para el SDE prominente */
+
+.kpi-card-sde {
+  max-width: 420px;
+  margin: 20px 0 24px;
+  border-color: var(--accent-start);
+}
+
+.kpi-card-sde .kpi-value {
+  font-size: 2rem;
+}
+
+/* Sliders (owner-only) */
+
+.slider-panel {
+  margin-top: 20px;
+  padding: 16px 18px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.slider-panel h3 {
+  margin-top: 0;
+}
+
+.slider-row {
+  margin: 14px 0;
+}
+
+.slider-row label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.slider-row label span {
+  color: var(--text);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent-start);
+}
+
+/* Waterfall (Sección 5) */
+
+.wf-bar-total {
+  fill: var(--wf-total);
+}
+
+.wf-bar-incremento {
+  fill: var(--wf-incremento);
+}
+
+.wf-bar-decremento {
+  fill: var(--wf-decremento);
+}
+
+.wf-bar:hover, .wf-bar:focus {
+  opacity: 0.85;
+  outline: none;
+}
+
+.wf-connector {
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.wf-value-label {
+  fill: var(--text);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.wf-cat-label {
+  font-size: 10px;
+}
+
+.swatch-wf-total { background: var(--wf-total); }
+.swatch-wf-incremento { background: var(--wf-incremento); }
+.swatch-wf-decremento { background: var(--wf-decremento); }
+
+/* Valoración — 3 lentes (Sección 6) */
+
+.lentes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.lente-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.lente-card h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.lente-desc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 12px;
+}
+
+.lente-nota, .lente-fuente {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  margin: 10px 0 0;
+}
+
+.lente-fuente {
+  font-style: italic;
+}
+
+.dcf-scenarios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.dcf-scenario {
+  padding: 12px 10px;
+}
+
+.dcf-scenario .kpi-label {
+  font-size: 0.72rem;
+}
+
+.dcf-scenario .kpi-value {
+  font-size: 1.1rem;
+}
+
+.dcf-scenario.dcf-base {
+  border-color: var(--accent-start);
+}
+
+/* Rango de valor (Sección 7) */
+
+.rb-activos { fill: var(--rb-activos); }
+.rb-multiplo { fill: var(--rb-multiplo); }
+.rb-dcf { fill: var(--rb-dcf); }
+
+.rb-bar:hover, .rb-bar:focus {
+  opacity: 0.85;
+  outline: none;
+}
+
+.rb-triangulacion {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+
+.rb-tri-label {
+  fill: var(--text-muted);
+  font-size: 11px;
+}
+
+.rb-value-label {
+  fill: var(--text-muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.swatch-rb-activos { background: var(--rb-activos); }
+.swatch-rb-multiplo { background: var(--rb-multiplo); }
+.swatch-rb-dcf { background: var(--rb-dcf); }
+
+.drivers-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.drivers-list li {
+  margin: 6px 0;
+}
+
 @media (max-width: 600px) {
   .key-card {
     padding: 32px 20px;
@@ -570,5 +788,9 @@ body.mode-buyer .owner-only {
 
   .section {
     padding: 32px 16px;
+  }
+
+  .dcf-scenarios {
+    grid-template-columns: 1fr;
   }
 }

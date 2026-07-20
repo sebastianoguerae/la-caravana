@@ -316,9 +316,26 @@ const DATA = {
       ownerOnly: true, // slider visible solo en modo dueño, para sensibilizar cuánto costaría reemplazar su gestión
     },
     multiploSDE: [1.5, 3.0],
+    // valorEquipos (línea original sin desglosar) se conserva por compatibilidad
+    // hacia atrás; la Sección 6 (lente de activos) usa los dos campos de abajo.
     valorEquipos: {
       valor: 80000000,
       rango: [50000000, 120000000],
+    },
+    // Valor de mercado de los equipos [investigación de precios, 2026-07-20,
+    // "leon/la caravana/investigacion_precios_equipos.md"]. TRM usada: 3.260
+    // COP/USD (TRM oficial vigente 18-21 jul 2026). "Usado" = valor de reventa
+    // en el mercado (piso de valoración); "nuevo" = costo de reposición a nuevo
+    // (referencia, no es lo que vendería la empresa). Punto medio de cada rango
+    // en USD convertido a COP a esa TRM: usado ≈ US$12.470 → $40,7M;
+    // nuevo ≈ US$28.790 → $93,9M.
+    valorEquiposUsado: {
+      valor: 40700000,
+      rango: [28000000, 54000000],
+    },
+    valorEquiposNuevo: {
+      valor: 93900000,
+      rango: [72000000, 116000000],
     },
     tasaDCF: 0.22,
     escenariosCrecimiento: {

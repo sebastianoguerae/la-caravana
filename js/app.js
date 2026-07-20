@@ -38,6 +38,8 @@ function showView(mode) {
 
   // Pinta las secciones 1-4 (definidas en js/render.js) tras pasar el gate.
   if (typeof renderAll === 'function') renderAll();
+  // Pinta las secciones 5-7 (normalización, valoración, rango — js/valuation.js).
+  if (typeof renderValoracionTodo === 'function') renderValoracionTodo();
 }
 
 function initKeyGate() {
