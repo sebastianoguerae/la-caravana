@@ -56,6 +56,17 @@ function initKeyGate() {
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    // crypto.subtle solo existe en contextos seguros (HTTPS o localhost). Al
+    // abrir el archivo directamente (file://) es `undefined` y checkKey()
+    // reventaría con un TypeError poco claro — se avisa con un mensaje
+    // entendible en vez de dejar que la promesa rechace en silencio.
+    if (!crypto.subtle) {
+      error.textContent = 'Abre el sitio vía servidor local (python3 -m http.server) o HTTPS — el navegador bloquea crypto en file://';
+      error.hidden = false;
+      return;
+    }
+
     const mode = await checkKey(input.value);
     if (mode) {
       sessionStorage.setItem(SESSION_KEY, mode);

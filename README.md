@@ -26,11 +26,16 @@ claro. El modo elegido persiste en `sessionStorage` mientras dure la pestaña.
 
 ## Desarrollo local
 
-No requiere build ni dependencias. Para probar:
+No requiere build ni dependencias, pero **no** abras `index.html` directo desde el
+disco (`file://`): el navegador bloquea `crypto.subtle` fuera de un contexto seguro
+(HTTPS o `localhost`), así que la pantalla de clave no puede validar el hash SHA-256 y
+falla con un error. Sirve la carpeta con un servidor local y abre `http://localhost`:
 
 ```
-open index.html
+python3 -m http.server
 ```
+
+Luego entra a `http://localhost:8000` en el navegador.
 
 ## Estado
 

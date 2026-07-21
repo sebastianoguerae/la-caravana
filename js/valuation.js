@@ -279,14 +279,26 @@ function buildNormalizacionShellHTML(supuestos, sde) {
   const sliderFuera = supuestos.fueraDeLibros;
   const sliderCosto = supuestos.costoReemplazo;
 
+  // El puente línea a línea (waterfall + notas de disclosure con montos
+  // individuales) es solo para dueños: un comprador no debe ver el desglose
+  // exacto de cada ajuste. El bloque `.buyer-summary` (fuera del owner-only,
+  // visible en ambos modos) le da al comprador el resultado (SDE, en vivo)
+  // más la misma honestidad metodológica obligatoria (fuera de libros
+  // declarado y no verificable, sueldos de socias, deuda extinta), pero en
+  // prosa, sin cifras línea a línea.
   return (
     '<h2>5. Normalización</h2>' +
     '<p class="section-lead">Puente desde la utilidad contable 2025 hasta el SDE (Seller’s Discretionary Earnings): la utilidad normalizada del dueño, sumando ajustes declarados por los dueños y restando el costo de reemplazar su gestión.</p>' +
-    '<div class="chart-card"><div id="wf-dynamic">' + buildWaterfallDynamicHTML(supuestos, sde) + '</div></div>' +
-    '<div id="sde-dynamic">' + buildSDEDynamicHTML(sde) + '</div>' +
-    '<p class="disclosure-note"><strong>Fuera de libros:</strong> ' + notaFueraDeLibros + '.</p>' +
-    '<p class="disclosure-note"><strong>Sueldos socias:</strong> ' + notaSocias + '</p>' +
-    '<p class="disclosure-note"><strong>Gastos financieros:</strong> ' + notaFinancieros + '</p>' +
+    '<div class="owner-only">' +
+      '<div class="chart-card"><div id="wf-dynamic">' + buildWaterfallDynamicHTML(supuestos, sde) + '</div></div>' +
+      '<p class="disclosure-note"><strong>Fuera de libros:</strong> ' + notaFueraDeLibros + '.</p>' +
+      '<p class="disclosure-note"><strong>Sueldos socias:</strong> ' + notaSocias + '</p>' +
+      '<p class="disclosure-note"><strong>Gastos financieros:</strong> ' + notaFinancieros + '</p>' +
+    '</div>' +
+    '<div class="buyer-summary">' +
+      '<div id="sde-dynamic">' + buildSDEDynamicHTML(sde) + '</div>' +
+      '<p class="disclosure-note">El SDE (utilidad discrecional del vendedor) parte del resultado contable 2025 y lo normaliza con ajustes estándar: ingresos declarados por los dueños que no pasan por contabilidad (no verificables), salarios de las socias que salieron de la operación, depreciación, gastos financieros de deuda ya extinta y honorarios sobredimensionados. Detalle disponible para los dueños.</p>' +
+    '</div>' +
     '<div class="owner-only slider-panel">' +
       '<h3>Ajustar supuestos (solo dueños)</h3>' +
       '<div class="slider-row">' +
@@ -334,7 +346,7 @@ function buildValoracionShellHTML(supuestos, sde, valoracion, multiploWorking) {
       '<div class="kpi-card"><span class="kpi-label">Valor de mercado (usado)</span><span class="kpi-value" id="valor-activos-usado">' + formatCOP(equiposUsado.valor) + '</span></div>' +
       '<div class="owner-only slider-row">' +
         '<label for="slider-valor-usado">Ajustar valor usado: <span id="lbl-valor-usado">' + formatCOP(equiposUsado.valor) + '</span></label>' +
-        '<input type="range" id="slider-valor-usado" min="' + equiposUsado.rango[0] + '" max="' + equiposUsado.rango[1] + '" step="500000" value="' + equiposUsado.valor + '">' +
+        '<input type="range" id="slider-valor-usado" min="' + equiposUsado.rango[0] + '" max="' + equiposUsado.rango[1] + '" step="100000" value="' + equiposUsado.valor + '">' +
       '</div>' +
       '<p class="lente-nota">Referencia — costo de reposición a nuevo: ' + formatCOP(equiposNuevo.rango[0]) + ' a ' + formatCOP(equiposNuevo.rango[1]) + ' (punto medio ' + formatCOP(equiposNuevo.valor) + ').</p>' +
       '<p class="lente-fuente">Fuente: investigación de precios de equipos, 20 jul 2026 (mercado usado y costo de reposición a nuevo; TRM 3.260 COP/USD).</p>' +
