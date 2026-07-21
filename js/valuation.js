@@ -102,8 +102,10 @@ function calcDCFEscenario(sde, g, tasa) {
 
 // Valoración a 3 lentes: activos (piso, rango fijo de valorEquiposUsado),
 // múltiplo de SDE (rango fijo multiploSDE), DCF (3 escenarios), y el rango de
-// triangulación resaltado — calculado (no hardcodeado) como el tramo entre el
-// mínimo del múltiplo y el DCF base.
+// triangulación resaltado — decisión metodológica 2026-07-21: la banda
+// destacada es la lente de múltiplo de SDE completa ([SDE×1.5, SDE×3.0]), la
+// lente principal para una Pyme de servicios; se calcula desde `sde` y
+// `multiploSDE` (no se hardcodea), y coincide con el rango `multiplo` de abajo.
 function calcValoracion(supuestos) {
   const sde = calcSDE(supuestos);
   const activos = supuestos.valorEquiposUsado.rango.slice();
@@ -117,14 +119,12 @@ function calcValoracion(supuestos) {
   };
   const mins = [activos[0], multiplo[0], dcf.pesimista];
   const maxs = [activos[1], multiplo[1], dcf.optimista];
-  const triLow = Math.min(multiplo[0], dcf.base);
-  const triHigh = Math.max(multiplo[0], dcf.base);
   return {
     sde: sde,
     activos: activos,
     multiplo: multiplo,
     dcf: dcf,
-    rango: [triLow, triHigh],
+    rango: [multiplo[0], multiplo[1]],
     rangoTotal: [Math.min.apply(null, mins), Math.max.apply(null, maxs)],
   };
 }
@@ -205,8 +205,8 @@ function buildWaterfallSVG(supuestos, sde) {
     const bottom = yScale(Math.min(b.before, b.after));
     const h = Math.max(bottom - top, 1.5);
     const cls = b.tipo === 'total' ? 'wf-bar-total' : (b.tipo === 'incremento' ? 'wf-bar-incremento' : 'wf-bar-decremento');
-    const sign = b.tipo === 'incremento' ? '+ ' : (b.tipo === 'decremento' ? '− ' : '');
-    const valorLabel = b.tipo === 'total' ? formatCOP(b.valor) : (sign + formatCOP(Math.abs(b.valor)).replace(/^[$−]+/, '$'));
+    const sign = b.valor === 0 ? '' : (b.tipo === 'incremento' ? '+ ' : (b.tipo === 'decremento' ? '− ' : ''));
+    const valorLabel = b.tipo === 'total' ? formatCOP(b.valor) : (sign + formatCOP(Math.abs(b.valor)));
 
     barsSvg += '<rect class="wf-bar ' + cls + '" tabindex="0" role="img" ' +
       'aria-label="' + b.label + ': ' + valorLabel + '" ' +
@@ -357,8 +357,9 @@ function buildValoracionShellHTML(supuestos, sde, valoracion, multiploWorking) {
       '<div id="card-dcf-dynamic">' + buildCardDCFDynamicHTML(supuestos, valoracion) + '</div>' +
       '<div class="owner-only slider-row">' +
         '<label for="slider-tasa-dcf">Tasa de descuento: <span id="lbl-tasa-dcf">' + (supuestos.tasaDCF * 100).toFixed(0) + '%</span></label>' +
-        '<input type="range" id="slider-tasa-dcf" min="0.15" max="0.35" step="0.01" value="' + supuestos.tasaDCF + '">' +
+        '<input type="range" id="slider-tasa-dcf" min="0.15" max="0.40" step="0.01" value="' + supuestos.tasaDCF + '">' +
       '</div>' +
+      '<p class="lente-nota">Tasa por defecto: 30% — refleja riesgo de persona clave y el tamaño de la empresa. A 22%, el valor terminal implicaba un múltiplo de ~4,5× SDE, por encima del techo de la lente de múltiplo (3,0×) (decisión metodológica 2026-07-21).</p>' +
     '</div>';
 
   return (
@@ -442,7 +443,7 @@ function buildRangoHTML(valoracion) {
 
   return (
     '<h2>7. Rango de valor</h2>' +
-    '<p class="section-lead">Triangulación de las 3 lentes de valoración. El rango resaltado se calcula entre el mínimo del múltiplo de SDE y el resultado del DCF base — no es un número fijo.</p>' +
+    '<p class="section-lead">Triangulación de las 3 lentes de valoración. Banda destacada: múltiplo de SDE (1,5×–3,0×), la lente principal para una Pyme de servicios. Los activos ($28–54M valor de mercado usado) son el piso absoluto; el DCF valida la sensibilidad a supuestos de crecimiento y tasa (decisión metodológica 2026-07-21).</p>' +
     '<div class="chart-card">' +
       svg +
       '<div class="chart-legend">' +
