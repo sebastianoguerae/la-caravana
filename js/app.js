@@ -2,7 +2,7 @@
 // Gate de claves: dueños vs. compradores.
 //
 // Hashes generados con:
-//   echo -n ELEFANTE2026 | shasum -a 256
+//   echo -n ELEFANTE | shasum -a 256
 //   echo -n CARAVANA2026 | shasum -a 256
 const HASH_OWNER = '61069f532b1fed207b07502ebfe867f1e902f5510c9646d65174902d2d9a5287';
 const HASH_BUYER = 'b755b5d9055a97da3e2f5255842a078bd198dc6ee5938f5f4fd1548245c2dc77';
