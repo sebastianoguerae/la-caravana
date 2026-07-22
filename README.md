@@ -20,9 +20,8 @@ entra en modo **dueños** o modo **compradores**:
 - Modo dueños: se ve todo el contenido, incluidos los elementos marcados `owner-only`.
 - Modo compradores: los elementos `owner-only` quedan ocultos.
 
-El modo se valida comparando el hash SHA-256 (hex) de la clave en mayúsculas contra
-constantes hardcodeadas en `js/app.js` — la clave nunca se guarda ni se transmite en
-claro. El modo elegido persiste en `sessionStorage` mientras dure la pestaña.
+Sin clave de acceso: el sitio abre directo en la vista de dueños. La vista de
+compradores se accede agregando `?vista=comprador` a la URL.
 
 ## Desarrollo local
 
