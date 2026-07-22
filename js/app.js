@@ -4,7 +4,7 @@
 // Hashes generados con:
 //   echo -n ELEFANTE2026 | shasum -a 256
 //   echo -n CARAVANA2026 | shasum -a 256
-const HASH_OWNER = '45b3d9cde53e4ec5ca83b4567ab32eaae68cc33f09b91e439cae05c49bd49c87';
+const HASH_OWNER = '61069f532b1fed207b07502ebfe867f1e902f5510c9646d65174902d2d9a5287';
 const HASH_BUYER = 'b755b5d9055a97da3e2f5255842a078bd198dc6ee5938f5f4fd1548245c2dc77';
 
 const SESSION_KEY = 'lacaravana_mode';
