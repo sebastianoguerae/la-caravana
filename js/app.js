@@ -67,7 +67,7 @@ function initKeyGate() {
       return;
     }
 
-    const mode = await checkKey(input.value);
+    const mode = await checkKey(input.value.trim());
     if (mode) {
       sessionStorage.setItem(SESSION_KEY, mode);
       error.hidden = true;
