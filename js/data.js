@@ -280,7 +280,10 @@ const DATA = {
     fuente: 'auxiliar "DESCRIPCION ACTIVOS FIJOS DE LA CARAVANA.xlsx", corte 30/06/2026, carpeta leon/la caravana/',
     grupos: [
       { nombre: 'Maquinaria y equipo', costo: 173313344,   depAcumulada: 84143087.64,  neto: 89170256.36 },
-      { nombre: 'Vehículo',            costo: 45000000,    depAcumulada: 27791718.12,  neto: 17208281.88 },
+      // Vehículo excluido de la valoración por decisión de los dueños
+      // (26-jul-2026): el campero Daihatsu no debe estar en la ecuación.
+      // Se conserva en el registro contable (transparencia), marcado como excluido.
+      { nombre: 'Vehículo',            costo: 45000000,    depAcumulada: 27791718.12,  neto: 17208281.88, excluidoDeValoracion: true },
       { nombre: 'Equipo de cómputo',   costo: 23891285,    depAcumulada: 20796446,     neto: 2080096 },
       { nombre: 'Muebles y enseres',   costo: 8647009,     depAcumulada: 5388918,      neto: 3258091 },
     ],
@@ -297,7 +300,10 @@ const DATA = {
       { nombre: 'Aurora Booth + estructura',                   anio: 2019, costo: 14052812, neto: 6343635,  notaUSD: 4069 },
       { nombre: 'Equipo 360 Boomerang + base',                 anio: 2023, costo: 22711794, neto: 18017099 },
     ],
-    totales: { costo: 250851638, depAcumulada: 138120169.76, neto: 111716725.24 },
+    // netoSinVehiculo = neto total (111,716,725.24) − neto Vehículo (17,208,281.88)
+    // = 94,508,443.36 — usado como valor de trabajo de la lente de activos
+    // desde la decisión de excluir el vehículo (26-jul-2026).
+    totales: { costo: 250851638, depAcumulada: 138120169.76, neto: 111716725.24, netoSinVehiculo: 94508443.36 },
   },
 
   // ── Servicios (según la web lacaravanacreativa.com) ───────────────────────
@@ -370,9 +376,12 @@ const DATA = {
     },
     // valor de trabajo de la lente de activos: default = valor neto en libros
     // (auxiliar 30/06/2026); piso del rango = liquidación a precios de
-    // reventa US (investigación 20-jul-2026)
+    // reventa US (investigación 20-jul-2026).
+    // Vehículo excluido por decisión de los dueños 26-jul-2026: default pasa
+    // de 111,716,725.24 (neto total) a 94,508,443.36 (= 111,716,725.24 −
+    // 17,208,281.88, neto en libros SIN el campero Daihatsu).
     valorActivosTrabajo: {
-      valor: 111716725.24,
+      valor: 94508443.36,
       rango: [28000000, 130000000],
     },
     // tasa 30% refleja riesgo de persona clave y tamaño; a 22% el valor terminal

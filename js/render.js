@@ -342,21 +342,27 @@ function buildActivosHTML() {
 
   // Tabla de valor en libros del auxiliar de activos fijos (30/06/2026) —
   // 4 grupos + fila total, visible en ambas vistas (comprador y dueño).
+  // El grupo Vehículo lleva la marca de excluido de la valoración (decisión
+  // de los dueños 26-jul-2026: el campero Daihatsu no entra en la ecuación),
+  // y se agrega una fila "Total sin vehículo" con el neto usado como valor
+  // de trabajo de la lente de activos.
   const af = DATA.activosFijos;
   const filaGrupos = af.grupos.map(function (g) {
-    return '<tr><td>' + g.nombre + '</td><td>' + formatCOP(g.costo) + '</td><td>' + formatCOP(g.depAcumulada) + '</td><td>' + formatCOP(g.neto) + '</td></tr>';
+    const marca = g.excluidoDeValoracion ? ' <span class="excluido-nota">(excluido de la valoración)</span>' : '';
+    return '<tr><td>' + g.nombre + marca + '</td><td>' + formatCOP(g.costo) + '</td><td>' + formatCOP(g.depAcumulada) + '</td><td>' + formatCOP(g.neto) + '</td></tr>';
   }).join('');
   const filaTotalActivos = '<tr class="pyg-total"><td>Total</td><td>' + formatCOP(af.totales.costo) + '</td><td>' + formatCOP(af.totales.depAcumulada) + '</td><td>' + formatCOP(af.totales.neto) + '</td></tr>';
+  const filaTotalSinVehiculo = '<tr class="pyg-total"><td>Total sin vehículo</td><td>—</td><td>—</td><td>' + formatCOP(af.totales.netoSinVehiculo) + '</td></tr>';
 
   const tablaActivosFijos =
     '<h3>Valor en libros (auxiliar 30/06/2026)</h3>' +
     '<div class="table-scroll">' +
       '<table class="pyg-table">' +
         '<thead><tr><th>Grupo</th><th>Costo</th><th>Dep. acumulada</th><th>Neto</th></tr></thead>' +
-        '<tbody>' + filaGrupos + filaTotalActivos + '</tbody>' +
+        '<tbody>' + filaGrupos + filaTotalActivos + filaTotalSinVehiculo + '</tbody>' +
       '</table>' +
     '</div>' +
-    '<p class="disclosure-note">El costo histórico incluye equipos importados (booths comprados en USD, con costos de importación); el registro incluye también el vehículo de la operación.</p>';
+    '<p class="disclosure-note">El costo histórico incluye equipos importados (booths comprados en USD, con costos de importación); el registro incluye también el vehículo de la operación, excluido de la valoración por decisión de los dueños.</p>';
 
   return (
     '<h2>3. Activos — la base del negocio</h2>' +

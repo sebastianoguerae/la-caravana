@@ -354,12 +354,12 @@ function buildValoracionShellHTML(supuestos, sde, valoracion, multiploWorking) {
     '<div class="lente-card">' +
       '<h3>a. Activos</h3>' +
       '<p class="lente-desc">Ancla: valor neto en libros del auxiliar de activos fijos. El piso del rango es la liquidación a precios de reventa internacionales.</p>' +
-      '<div class="kpi-card"><span class="kpi-label">Valor de activos (neto en libros, 30/06/2026)</span><span class="kpi-value" id="valor-activos-neto">' + formatCOP(activosTrabajo.valor) + '</span></div>' +
+      '<div class="kpi-card"><span class="kpi-label">Valor de activos (neto en libros sin vehículo, 30/06/2026)</span><span class="kpi-value" id="valor-activos-neto">' + formatCOP(activosTrabajo.valor) + '</span></div>' +
       '<div class="owner-only slider-row">' +
         '<label for="slider-valor-activos">Ajustar valor de trabajo: <span id="lbl-valor-activos">' + formatCOP(activosTrabajo.valor) + '</span></label>' +
         '<input type="range" id="slider-valor-activos" min="' + activosTrabajo.rango[0] + '" max="' + activosTrabajo.rango[1] + '" step="100000" value="' + activosTrabajo.valor + '">' +
       '</div>' +
-      '<p class="lente-nota">Referencias — costo de adquisición histórico: ' + formatCOP(DATA.activosFijos.totales.costo) + ' (equipos importados: los booths costaron USD 5.300–9.300 c/u puestos en Colombia). Reventa usada a precios US: ' + formatCOP(equiposUsado.rango[0]) + '–' + formatCOP(equiposUsado.rango[1]) + '. Reposición a nuevo (US, sin importación): ' + formatCOP(equiposNuevo.rango[0]) + '–' + formatCOP(equiposNuevo.rango[1]) + '. Incluye campero Daihatsu 2017 (neto ' + formatCOP(grupoVehiculo.neto) + ').</p>' +
+      '<p class="lente-nota">Referencias — costo de adquisición histórico: ' + formatCOP(DATA.activosFijos.totales.costo) + ' (equipos importados: los booths costaron USD 5.300–9.300 c/u puestos en Colombia). Reventa usada a precios US: ' + formatCOP(equiposUsado.rango[0]) + '–' + formatCOP(equiposUsado.rango[1]) + '. Reposición a nuevo (US, sin importación): ' + formatCOP(equiposNuevo.rango[0]) + '–' + formatCOP(equiposNuevo.rango[1]) + '. Excluye el vehículo (campero Daihatsu 2017, neto ' + formatCOP(grupoVehiculo.neto) + ') por decisión de los dueños.</p>' +
       '<p class="lente-fuente">Fuente: ' + DATA.activosFijos.fuente + '; investigación de precios de equipos, 20 jul 2026 (reventa usada y reposición a nuevo; TRM 3.260 COP/USD).</p>' +
     '</div>';
 
@@ -466,7 +466,7 @@ function buildRangoHTML(valoracion) {
 
   return (
     '<h2>7. Rango de valor</h2>' +
-    '<p class="section-lead">Triangulación de las 3 lentes de valoración. Banda destacada: múltiplo de SDE (1,5×–3,0×), la lente principal para una Pyme de servicios. Los activos son el piso: desde $28M (liquidación) hasta $112M (valor neto en libros); el DCF valida la sensibilidad a supuestos de crecimiento y tasa (decisión metodológica 2026-07-21).</p>' +
+    '<p class="section-lead">Triangulación de las 3 lentes de valoración. Banda destacada: múltiplo de SDE (1,5×–3,0×), la lente principal para una Pyme de servicios. Los activos son el piso: desde $28M (liquidación) hasta $94M (valor neto en libros de los equipos); el DCF valida la sensibilidad a supuestos de crecimiento y tasa (decisión metodológica 2026-07-21).</p>' +
     '<div class="chart-card">' +
       svg +
       '<div class="chart-legend">' +
