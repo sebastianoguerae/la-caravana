@@ -340,10 +340,29 @@ function buildActivosHTML() {
     '</div>';
   }).join('');
 
+  // Tabla de valor en libros del auxiliar de activos fijos (30/06/2026) —
+  // 4 grupos + fila total, visible en ambas vistas (comprador y dueño).
+  const af = DATA.activosFijos;
+  const filaGrupos = af.grupos.map(function (g) {
+    return '<tr><td>' + g.nombre + '</td><td>' + formatCOP(g.costo) + '</td><td>' + formatCOP(g.depAcumulada) + '</td><td>' + formatCOP(g.neto) + '</td></tr>';
+  }).join('');
+  const filaTotalActivos = '<tr class="pyg-total"><td>Total</td><td>' + formatCOP(af.totales.costo) + '</td><td>' + formatCOP(af.totales.depAcumulada) + '</td><td>' + formatCOP(af.totales.neto) + '</td></tr>';
+
+  const tablaActivosFijos =
+    '<h3>Valor en libros (auxiliar 30/06/2026)</h3>' +
+    '<div class="table-scroll">' +
+      '<table class="pyg-table">' +
+        '<thead><tr><th>Grupo</th><th>Costo</th><th>Dep. acumulada</th><th>Neto</th></tr></thead>' +
+        '<tbody>' + filaGrupos + filaTotalActivos + '</tbody>' +
+      '</table>' +
+    '</div>' +
+    '<p class="disclosure-note">El costo histórico incluye equipos importados (booths comprados en USD, con costos de importación); el registro incluye también el vehículo de la operación.</p>';
+
   return (
     '<h2>3. Activos — la base del negocio</h2>' +
     '<p class="section-lead">La base del negocio: equipos profesionales listos para operar.</p>' +
-    '<div class="equipos-grid">' + cards + '</div>'
+    '<div class="equipos-grid">' + cards + '</div>' +
+    tablaActivosFijos
   );
 }
 

@@ -44,7 +44,7 @@
 const valState = {
   fueraDeLibros: DATA.supuestosDefault.fueraDeLibros.valor,
   costoReemplazo: DATA.supuestosDefault.costoReemplazo.valor,
-  valorEquiposUsado: DATA.supuestosDefault.valorEquiposUsado.valor,
+  valorActivosTrabajo: DATA.supuestosDefault.valorActivosTrabajo.valor,
   multiploWorking: 2.0,
   tasaDCF: DATA.supuestosDefault.tasaDCF,
 };
@@ -60,7 +60,8 @@ function getSupuestosConEstado() {
     addbacks: base.addbacks,
     costoReemplazo: { valor: valState.costoReemplazo, rango: base.costoReemplazo.rango, ownerOnly: base.costoReemplazo.ownerOnly },
     multiploSDE: base.multiploSDE,
-    valorEquiposUsado: { valor: valState.valorEquiposUsado, rango: base.valorEquiposUsado.rango },
+    valorActivosTrabajo: { valor: valState.valorActivosTrabajo, rango: base.valorActivosTrabajo.rango },
+    valorEquiposUsado: base.valorEquiposUsado,
     valorEquiposNuevo: base.valorEquiposNuevo,
     tasaDCF: valState.tasaDCF,
     escenariosCrecimiento: base.escenariosCrecimiento,
@@ -100,15 +101,23 @@ function calcDCFEscenario(sde, g, tasa) {
   return vp + vpTerminal;
 }
 
-// Valoración a 3 lentes: activos (piso, rango fijo de valorEquiposUsado),
-// múltiplo de SDE (rango fijo multiploSDE), DCF (3 escenarios), y el rango de
+// Valoración a 3 lentes: activos (ancla = valor neto en libros del auxiliar
+// de activos fijos, piso = liquidación a precios de reventa US), múltiplo de
+// SDE (rango fijo multiploSDE), DCF (3 escenarios), y el rango de
 // triangulación resaltado — decisión metodológica 2026-07-21: la banda
 // destacada es la lente de múltiplo de SDE completa ([SDE×1.5, SDE×3.0]), la
 // lente principal para una Pyme de servicios; se calcula desde `sde` y
 // `multiploSDE` (no se hardcodea), y coincide con el rango `multiplo` de abajo.
 function calcValoracion(supuestos) {
   const sde = calcSDE(supuestos);
-  const activos = supuestos.valorEquiposUsado.rango.slice();
+  // Activos: intervalo [piso de liquidación, valor de trabajo]. El piso fijo
+  // de liquidación es $28M (reventa a precios US); el valor de trabajo por
+  // defecto es el neto en libros del auxiliar (30/06/2026). Se calcula con
+  // min/max (no se asume working >= piso) para no romper si el slider baja
+  // por debajo de los $28M.
+  const pisoLiquidacion = 28000000;
+  const working = supuestos.valorActivosTrabajo.valor;
+  const activos = [Math.min(pisoLiquidacion, working), Math.max(pisoLiquidacion, working)];
   const multiplo = [sde * supuestos.multiploSDE[0], sde * supuestos.multiploSDE[1]];
   const tasa = supuestos.tasaDCF;
   const esc = supuestos.escenariosCrecimiento;
@@ -336,20 +345,22 @@ function buildCardDCFDynamicHTML(supuestos, valoracion) {
 }
 
 function buildValoracionShellHTML(supuestos, sde, valoracion, multiploWorking) {
+  const activosTrabajo = supuestos.valorActivosTrabajo;
   const equiposUsado = supuestos.valorEquiposUsado;
   const equiposNuevo = supuestos.valorEquiposNuevo;
+  const grupoVehiculo = DATA.activosFijos.grupos.filter(function (g) { return g.nombre === 'Vehículo'; })[0];
 
   const cardActivos =
     '<div class="lente-card">' +
       '<h3>a. Activos</h3>' +
-      '<p class="lente-desc">Piso de valoración: valor de reventa de los equipos en el mercado usado.</p>' +
-      '<div class="kpi-card"><span class="kpi-label">Valor de mercado (usado)</span><span class="kpi-value" id="valor-activos-usado">' + formatCOP(equiposUsado.valor) + '</span></div>' +
+      '<p class="lente-desc">Ancla: valor neto en libros del auxiliar de activos fijos. El piso del rango es la liquidación a precios de reventa internacionales.</p>' +
+      '<div class="kpi-card"><span class="kpi-label">Valor de activos (neto en libros, 30/06/2026)</span><span class="kpi-value" id="valor-activos-neto">' + formatCOP(activosTrabajo.valor) + '</span></div>' +
       '<div class="owner-only slider-row">' +
-        '<label for="slider-valor-usado">Ajustar valor usado: <span id="lbl-valor-usado">' + formatCOP(equiposUsado.valor) + '</span></label>' +
-        '<input type="range" id="slider-valor-usado" min="' + equiposUsado.rango[0] + '" max="' + equiposUsado.rango[1] + '" step="100000" value="' + equiposUsado.valor + '">' +
+        '<label for="slider-valor-activos">Ajustar valor de trabajo: <span id="lbl-valor-activos">' + formatCOP(activosTrabajo.valor) + '</span></label>' +
+        '<input type="range" id="slider-valor-activos" min="' + activosTrabajo.rango[0] + '" max="' + activosTrabajo.rango[1] + '" step="100000" value="' + activosTrabajo.valor + '">' +
       '</div>' +
-      '<p class="lente-nota">Referencia — costo de reposición a nuevo: ' + formatCOP(equiposNuevo.rango[0]) + ' a ' + formatCOP(equiposNuevo.rango[1]) + ' (punto medio ' + formatCOP(equiposNuevo.valor) + ').</p>' +
-      '<p class="lente-fuente">Fuente: investigación de precios de equipos, 20 jul 2026 (mercado usado y costo de reposición a nuevo; TRM 3.260 COP/USD).</p>' +
+      '<p class="lente-nota">Referencias — costo de adquisición histórico: ' + formatCOP(DATA.activosFijos.totales.costo) + ' (equipos importados: los booths costaron USD 5.300–9.300 c/u puestos en Colombia). Reventa usada a precios US: ' + formatCOP(equiposUsado.rango[0]) + '–' + formatCOP(equiposUsado.rango[1]) + '. Reposición a nuevo (US, sin importación): ' + formatCOP(equiposNuevo.rango[0]) + '–' + formatCOP(equiposNuevo.rango[1]) + '. Incluye campero Daihatsu 2017 (neto ' + formatCOP(grupoVehiculo.neto) + ').</p>' +
+      '<p class="lente-fuente">Fuente: ' + DATA.activosFijos.fuente + '; investigación de precios de equipos, 20 jul 2026 (reventa usada y reposición a nuevo; TRM 3.260 COP/USD).</p>' +
     '</div>';
 
   const cardMultiplo =
@@ -455,7 +466,7 @@ function buildRangoHTML(valoracion) {
 
   return (
     '<h2>7. Rango de valor</h2>' +
-    '<p class="section-lead">Triangulación de las 3 lentes de valoración. Banda destacada: múltiplo de SDE (1,5×–3,0×), la lente principal para una Pyme de servicios. Los activos ($28–54M valor de mercado usado) son el piso absoluto; el DCF valida la sensibilidad a supuestos de crecimiento y tasa (decisión metodológica 2026-07-21).</p>' +
+    '<p class="section-lead">Triangulación de las 3 lentes de valoración. Banda destacada: múltiplo de SDE (1,5×–3,0×), la lente principal para una Pyme de servicios. Los activos son el piso: desde $28M (liquidación) hasta $112M (valor neto en libros); el DCF valida la sensibilidad a supuestos de crecimiento y tasa (decisión metodológica 2026-07-21).</p>' +
     '<div class="chart-card">' +
       svg +
       '<div class="chart-legend">' +
@@ -505,8 +516,8 @@ function updateDynamicParts(supuestos, sde, valoracion) {
 
   setTextIfExists('lbl-fuera-libros', formatCOP(supuestos.fueraDeLibros.valor));
   setTextIfExists('lbl-costo-reemplazo', formatCOP(supuestos.costoReemplazo.valor));
-  setTextIfExists('lbl-valor-usado', formatCOP(supuestos.valorEquiposUsado.valor));
-  setTextIfExists('valor-activos-usado', formatCOP(supuestos.valorEquiposUsado.valor));
+  setTextIfExists('lbl-valor-activos', formatCOP(supuestos.valorActivosTrabajo.valor));
+  setTextIfExists('valor-activos-neto', formatCOP(supuestos.valorActivosTrabajo.valor));
   setTextIfExists('lbl-multiplo', valState.multiploWorking.toFixed(1) + '×');
   setTextIfExists('lbl-tasa-dcf', (supuestos.tasaDCF * 100).toFixed(0) + '%');
 }
@@ -515,7 +526,7 @@ function attachSliderListeners() {
   const bindings = [
     { id: 'slider-fuera-libros', field: 'fueraDeLibros' },
     { id: 'slider-costo-reemplazo', field: 'costoReemplazo' },
-    { id: 'slider-valor-usado', field: 'valorEquiposUsado' },
+    { id: 'slider-valor-activos', field: 'valorActivosTrabajo' },
     { id: 'slider-multiplo', field: 'multiploWorking' },
     { id: 'slider-tasa-dcf', field: 'tasaDCF' },
   ];

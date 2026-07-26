@@ -265,6 +265,41 @@ const DATA = {
     },
   ],
 
+  // ── Activos fijos [Fuente: auxiliar "DESCRIPCION ACTIVOS FIJOS DE LA
+  //    CARAVANA.xlsx", corte 30/06/2026, carpeta leon/la caravana/] ─────────
+  // Registro contable de activos fijos de la empresa: 4 grupos (maquinaria y
+  // equipo de eventos, vehículo, equipo de cómputo, muebles y enseres), con
+  // costo histórico de adquisición, depreciación acumulada y valor neto en
+  // libros a la fecha de corte. `maquinariaItems` desglosa los 8 ítems
+  // notables dentro del grupo "Maquinaria y equipo" (los booths/equipos de
+  // evento); varios se adquirieron en USD puestos en Colombia (importación) —
+  // se documenta el monto en USD original cuando aplica (`notaUSD`), pero
+  // costo/neto quedan en COP tal como el auxiliar.
+  activosFijos: {
+    corte: '30/06/2026',
+    fuente: 'auxiliar "DESCRIPCION ACTIVOS FIJOS DE LA CARAVANA.xlsx", corte 30/06/2026, carpeta leon/la caravana/',
+    grupos: [
+      { nombre: 'Maquinaria y equipo', costo: 173313344,   depAcumulada: 84143087.64,  neto: 89170256.36 },
+      { nombre: 'Vehículo',            costo: 45000000,    depAcumulada: 27791718.12,  neto: 17208281.88 },
+      { nombre: 'Equipo de cómputo',   costo: 23891285,    depAcumulada: 20796446,     neto: 2080096 },
+      { nombre: 'Muebles y enseres',   costo: 8647009,     depAcumulada: 5388918,      neto: 3258091 },
+    ],
+    // Ítems notables del grupo "Maquinaria y equipo" (suman exacto al neto
+    // del grupo: 89,170,256.36). notaUSD = monto original en USD (equipos
+    // importados, puestos en Colombia) cuando el auxiliar lo documenta.
+    maquinariaItems: [
+      { nombre: 'Photobooth 1 (Supply Co)',                    anio: 2015, costo: 23518305, neto: 9084168 },
+      { nombre: 'Photobooth 2 (Photobooth Solutions)',         anio: 2016, costo: 28108952, neto: 9752063.36 },
+      { nombre: 'Impresora DS40',                              anio: 2016, costo: 4705607,  neto: 1821736 },
+      { nombre: 'Photobooth 3 (Supply Co)',                    anio: 2017, costo: 27326406, neto: 15246409, notaUSD: 9300 },
+      { nombre: 'Photobooth 4 (Photobooth Solutions)',         anio: 2017, costo: 15752382, neto: 8971498,  notaUSD: 5300 },
+      { nombre: 'Mirror Booth',                                anio: 2017, costo: 35000000, neto: 19933648, notaUSD: 10310 },
+      { nombre: 'Aurora Booth + estructura',                   anio: 2019, costo: 14052812, neto: 6343635,  notaUSD: 4069 },
+      { nombre: 'Equipo 360 Boomerang + base',                 anio: 2023, costo: 22711794, neto: 18017099 },
+    ],
+    totales: { costo: 250851638, depAcumulada: 138120169.76, neto: 111716725.24 },
+  },
+
   // ── Servicios (según la web lacaravanacreativa.com) ───────────────────────
   servicios: [
     'Photo Booth',
@@ -332,6 +367,13 @@ const DATA = {
     valorEquiposNuevo: {
       valor: 93900000,
       rango: [72000000, 116000000],
+    },
+    // valor de trabajo de la lente de activos: default = valor neto en libros
+    // (auxiliar 30/06/2026); piso del rango = liquidación a precios de
+    // reventa US (investigación 20-jul-2026)
+    valorActivosTrabajo: {
+      valor: 111716725.24,
+      rango: [28000000, 130000000],
     },
     // tasa 30% refleja riesgo de persona clave y tamaño; a 22% el valor terminal
     // implicaba ~4.5× SDE, por encima del techo de la lente de múltiplos
