@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Caravana Creativa — Una propuesta</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* Página carta — reutiliza variables y componentes de css/style.css,
+     con un layout propio más simple (una sola columna, sin nav, sin gate). */
+  .propuesta-main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .propuesta-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .propuesta-header .logo {
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .propuesta-header h1 {
+    font-size: 1.5rem;
+    margin: 0 0 8px;
+  }
+
+  .propuesta-header .subtitle {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .propuesta-section {
+    margin: 0 0 44px;
+  }
+
+  .propuesta-section h2 {
+    font-size: 1.25rem;
+    margin: 0 0 16px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+
+  .propuesta-section p {
+    margin: 0 0 14px;
+    font-size: 1rem;
+  }
+
+  .propuesta-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .marcas-total-line {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .respaldo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 20px 0 20px;
+  }
+
+  .respaldo-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+
+  .respaldo-card .respaldo-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+  }
+
+  .respaldo-card .respaldo-value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .respaldo-card .respaldo-nota {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    margin-top: 6px;
+  }
+
+  .ver-valoracion {
+    color: var(--accent-start);
+    font-size: 0.95rem;
+  }
+
+  /* La propuesta — tarjeta grande, protagonista visual */
+
+  .oferta-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--accent-start);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin-top: 16px;
+  }
+
+  .oferta-precio {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .oferta-pagos {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 24px;
+  }
+
+  .oferta-lista {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.98rem;
+  }
+
+  .oferta-lista li {
+    margin: 12px 0;
+  }
+
+  .propuesta-cierre {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .propuesta-main {
+      padding: 32px 16px 60px;
+    }
+
+    .oferta-card {
+      padding: 24px 18px;
+    }
+
+    .oferta-precio {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<main class="propuesta-main">
+
+  <header class="propuesta-header">
+    <div class="logo" aria-hidden="true">🐘</div>
+    <h1>La Caravana Creativa</h1>
+    <p class="subtitle">Una propuesta para que el negocio quede en las mejores manos</p>
+  </header>
+
+  <section class="propuesta-section">
+    <h2>Qué es hoy La Caravana</h2>
+    <p>
+      La Caravana Creativa lleva más de 10 años creando experiencias fotográficas para eventos,
+      operando en Bogotá, Cartagena, Barranquilla y Medellín. Hoy genera cerca de $200 millones de
+      ingresos al año, con equipos propios — photo booths, espejo mágico, aurora booth, anillo
+      fiestero, video 360 y más — listos para operar desde el primer día.
+    </p>
+  </section>
+
+  <section class="propuesta-section">
+    <h2>Los clientes que confían en nosotros</h2>
+    <ul class="marcas-chip-grid">
+      <li class="marca-chip">Starbucks</li>
+      <li class="marca-chip">BMW</li>
+      <li class="marca-chip">Mercedes-Benz</li>
+      <li class="marca-chip">Coca-Cola</li>
+      <li class="marca-chip">LATAM Airlines</li>
+      <li class="marca-chip">Tiffany &amp; Co.</li>
+      <li class="marca-chip">Carolina Herrera</li>
+      <li class="marca-chip">HBO</li>
+      <li class="marca-chip">Discovery Channel</li>
+      <li class="marca-chip">Sofitel</li>
+      <li class="marca-chip">DoubleTree by Hilton</li>
+      <li class="marca-chip">Belcorp</li>
+      <li class="marca-chip">Éxito</li>
+      <li class="marca-chip">Hard Rock Cafe</li>
+      <li class="marca-chip">Mango</li>
+    </ul>
+    <p class="marcas-total-line">37 marcas en total confían hoy en La Caravana.</p>
+    <p>
+      La reputación y la calidad de estos clientes es parte fundamental del valor del negocio: no
+      es solo un listado de logos, es una prueba de que las marcas más exigentes del país repiten
+      con nosotros.
+    </p>
+  </section>
+
+  <section class="propuesta-section">
+    <h2>Lo que respalda el valor</h2>
+    <div class="respaldo-grid">
+      <div class="respaldo-card">
+        <span class="respaldo-label">Costo de compra de los equipos</span>
+        <span class="respaldo-value">$205,9M</span>
+        <span class="respaldo-nota">Sin vehículo — equipos importados</span>
+      </div>
+      <div class="respaldo-card">
+        <span class="respaldo-label">Valor neto en libros</span>
+        <span class="respaldo-value">$94,5M</span>
+        <span class="respaldo-nota">Corte 30/06/2026</span>
+      </div>
+      <div class="respaldo-card">
+        <span class="respaldo-label">Rango de valoración del negocio</span>
+        <span class="respaldo-value">$174M – $349M</span>
+        <span class="respaldo-nota">Múltiplo de utilidad normalizada del dueño</span>
+      </div>
+    </div>
+    <p><a class="ver-valoracion" href="index.html">Ver la valoración completa →</a></p>
+  </section>
+
+  <section class="propuesta-section propuesta-oferta">
+    <h2>La propuesta</h2>
+    <div class="oferta-card">
+      <p class="oferta-precio">Precio total: $150 millones</p>
+      <p class="oferta-pagos">$50M hoy · $50M en un año · $50M en dos años (sin intereses)</p>
+      <ul class="oferta-lista">
+        <li>
+          Es un precio por debajo del costo de compra de los equipos ($205,9M) y muy por debajo del
+          rango de valoración del negocio en marcha ($174M–$349M).
+        </li>
+        <li>
+          El negocio genera caja suficiente para que los pagos 2 y 3 salgan de la propia operación —
+          no tienes que poner ese dinero de tu bolsillo.
+        </li>
+        <li>
+          Es financiación directa: no hay bancos de por medio, ni intereses, ni trámites de crédito.
+        </li>
+        <li>
+          Y la razón más importante: trabajaste este proyecto desde el comienzo. Nadie está mejor
+          preparada para que La Caravana siga creciendo. Queremos que te quedes con el negocio, en
+          condiciones que reconozcan eso.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="propuesta-cierre">
+    <p>Gracias por todos estos años. Esta propuesta es, sobre todo, una forma de decir que confiamos
+    en ti para que La Caravana siga siendo lo que es — y sea aún más.</p>
+  </footer>
+
+</main>
+
+</body>
+</html>
