@@ -4,84 +4,184 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>La Caravana Creativa — Una propuesta</title>
-<link rel="stylesheet" href="css/style.css">
 <style>
-  /* Página carta — reutiliza variables y componentes de css/style.css,
-     con un layout propio más simple (una sola columna, sin nav, sin gate). */
+  :root {
+    --grad-purple: #a86bc9;
+    --grad-pink: #ec6ead;
+    --grad-orange: #f9a15f;
+    --grad-orange2: #fbb040;
+    --brand-gradient: linear-gradient(135deg, var(--grad-purple) 0%, var(--grad-pink) 45%, var(--grad-orange) 75%, var(--grad-orange2) 100%);
+    --ink: #3a2a3a;
+    --ink-soft: #6b5468;
+    --card-bg: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: ui-rounded, "SF Pro Rounded", "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    background: var(--brand-gradient);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Translucent dot patterns tucked in the corners, like the brochure */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    width: 420px;
+    height: 420px;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.55) 3px, transparent 3.5px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(circle at 0 0, black 0%, transparent 70%);
+            mask-image: radial-gradient(circle at 0 0, black 0%, transparent 70%);
+    z-index: 0;
+  }
+
+  body::before {
+    top: 0;
+    left: 0;
+  }
+
+  body::after {
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+  }
+
   .propuesta-main {
-    max-width: 720px;
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
     margin: 0 auto;
-    padding: 48px 24px 80px;
+    padding: 56px 24px 90px;
   }
 
   .propuesta-header {
     text-align: center;
-    margin-bottom: 48px;
+    margin-bottom: 44px;
+    color: #fff;
   }
 
   .propuesta-header .logo {
-    font-size: 3rem;
+    font-size: 3.4rem;
     line-height: 1;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.18));
   }
 
   .propuesta-header h1 {
-    font-size: 1.5rem;
-    margin: 0 0 8px;
+    font-size: 2.1rem;
+    letter-spacing: 0.02em;
+    margin: 4px 0 2px;
+    text-transform: uppercase;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .propuesta-header .brand-sub {
+    font-size: 1rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0 0 16px;
+    opacity: 0.95;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
   }
 
   .propuesta-header .subtitle {
-    color: var(--text-muted);
-    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.08rem;
     max-width: 480px;
     margin: 0 auto;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
   }
 
-  .propuesta-section {
-    margin: 0 0 44px;
+  .propuesta-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    box-shadow: 0 18px 40px rgba(90, 30, 70, 0.22);
+    padding: 32px 30px;
+    margin: 0 0 28px;
   }
 
-  .propuesta-section h2 {
-    font-size: 1.25rem;
+  .propuesta-card h2 {
+    font-size: 1.2rem;
     margin: 0 0 16px;
-    background: var(--gradient);
+    display: inline-block;
+    font-weight: 800;
+    background: var(--brand-gradient);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    display: inline-block;
   }
 
-  .propuesta-section p {
+  .propuesta-card p {
     margin: 0 0 14px;
     font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink);
   }
 
-  .propuesta-section p:last-child {
+  .propuesta-card p:last-child {
     margin-bottom: 0;
   }
 
   .marcas-total-line {
-    color: var(--text-muted);
+    color: var(--ink-soft);
     font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .marcas-chip-grid {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 4px 0 18px;
+    padding: 0;
+  }
+
+  .marca-chip {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: linear-gradient(#fff, #fff) padding-box,
+                var(--brand-gradient) border-box;
+    border: 1.5px solid transparent;
   }
 
   .respaldo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 14px;
-    margin: 20px 0 20px;
+    margin: 18px 0 20px;
   }
 
   .respaldo-card {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    background: linear-gradient(160deg, #fdf1f7, #fef4ea);
+    border: 1px solid rgba(168, 107, 201, 0.25);
+    border-radius: 18px;
     padding: 18px 20px;
   }
 
   .respaldo-card .respaldo-label {
     display: block;
-    color: var(--text-muted);
+    color: var(--ink-soft);
     font-size: 0.82rem;
     margin-bottom: 6px;
   }
@@ -89,77 +189,158 @@
   .respaldo-card .respaldo-value {
     display: block;
     font-size: 1.3rem;
-    font-weight: 600;
+    font-weight: 800;
+    color: var(--ink);
   }
 
   .respaldo-card .respaldo-nota {
     display: block;
-    color: var(--text-muted);
+    color: var(--ink-soft);
     font-size: 0.78rem;
     margin-top: 6px;
   }
 
-  .ver-valoracion {
-    color: var(--accent-start);
-    font-size: 0.95rem;
+  .ver-valoracion-wrap {
+    text-align: center;
+    margin-top: 22px;
   }
 
-  /* La propuesta — tarjeta grande, protagonista visual */
+  .ver-valoracion {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 12px 26px;
+    border-radius: 999px;
+    background: var(--brand-gradient);
+    box-shadow: 0 10px 22px rgba(200, 90, 130, 0.35);
+    transition: transform 0.15s ease;
+  }
 
-  .oferta-card {
-    background: var(--bg-elevated);
-    border: 1px solid var(--accent-start);
-    border-radius: var(--radius);
-    padding: 32px 28px;
-    margin-top: 16px;
+  .ver-valoracion:hover {
+    transform: translateY(-2px);
+  }
+
+  /* La propuesta — tarjeta hero, protagonista visual */
+
+  .propuesta-oferta .propuesta-card {
+    padding: 3px;
+    background: var(--brand-gradient);
+    box-shadow: 0 22px 48px rgba(150, 40, 100, 0.32);
+  }
+
+  .oferta-card-inner {
+    background: #fff;
+    border-radius: 21px;
+    padding: 34px 30px 30px;
+  }
+
+  .propuesta-oferta h2 {
+    margin-bottom: 6px;
+  }
+
+  .oferta-precio-label {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin: 0 0 2px;
+    font-weight: 600;
   }
 
   .oferta-precio {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 8px;
-    background: var(--gradient);
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin: 0 0 22px;
+    background: var(--brand-gradient);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    line-height: 1.1;
   }
 
-  .oferta-pagos {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text);
-    margin: 0 0 24px;
+  .oferta-pagos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin: 0 0 26px;
+  }
+
+  .oferta-pago-pill {
+    text-align: center;
+    border-radius: 18px;
+    padding: 16px 12px;
+    background: linear-gradient(160deg, #fdeef6, #fff3e8);
+    border: 1.5px solid rgba(236, 106, 173, 0.3);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .oferta-pagos-nota {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin: -14px 0 24px;
+    font-style: italic;
   }
 
   .oferta-lista {
     margin: 0;
-    padding-left: 20px;
+    padding-left: 22px;
     font-size: 0.98rem;
   }
 
   .oferta-lista li {
     margin: 12px 0;
+    line-height: 1.55;
   }
 
   .propuesta-cierre {
     text-align: center;
-    color: var(--text-muted);
-    font-size: 1rem;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
+    color: #fff;
+    font-size: 1.05rem;
+    padding: 26px 28px 0;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
   }
 
   @media (max-width: 600px) {
     .propuesta-main {
-      padding: 32px 16px 60px;
+      padding: 40px 14px 70px;
     }
 
-    .oferta-card {
+    .propuesta-card {
       padding: 24px 18px;
     }
 
+    .oferta-card-inner {
+      padding: 26px 18px 22px;
+    }
+
     .oferta-precio {
+      font-size: 2rem;
+    }
+
+    .propuesta-header h1 {
       font-size: 1.6rem;
+    }
+  }
+
+  @media print {
+    body {
+      background: #fff !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .propuesta-header {
+      color: var(--ink);
+      text-shadow: none;
+    }
+
+    .propuesta-card,
+    .oferta-card-inner {
+      box-shadow: none;
+      border: 1px solid #eee;
     }
   }
 </style>
@@ -170,92 +351,107 @@
 
   <header class="propuesta-header">
     <div class="logo" aria-hidden="true">🐘</div>
-    <h1>La Caravana Creativa</h1>
+    <h1>La Caravana</h1>
+    <p class="brand-sub">Creativa</p>
     <p class="subtitle">Una propuesta para que el negocio quede en las mejores manos</p>
   </header>
 
   <section class="propuesta-section">
-    <h2>Qué es hoy La Caravana</h2>
-    <p>
-      La Caravana Creativa lleva más de 10 años creando experiencias fotográficas para eventos,
-      operando en Bogotá, Cartagena, Barranquilla y Medellín. Hoy genera cerca de $200 millones de
-      ingresos al año, con equipos propios — photo booths, espejo mágico, aurora booth, anillo
-      fiestero, video 360 y más — listos para operar desde el primer día.
-    </p>
-  </section>
-
-  <section class="propuesta-section">
-    <h2>Los clientes que confían en nosotros</h2>
-    <ul class="marcas-chip-grid">
-      <li class="marca-chip">Starbucks</li>
-      <li class="marca-chip">BMW</li>
-      <li class="marca-chip">Mercedes-Benz</li>
-      <li class="marca-chip">Coca-Cola</li>
-      <li class="marca-chip">LATAM Airlines</li>
-      <li class="marca-chip">Tiffany &amp; Co.</li>
-      <li class="marca-chip">Carolina Herrera</li>
-      <li class="marca-chip">HBO</li>
-      <li class="marca-chip">Discovery Channel</li>
-      <li class="marca-chip">Sofitel</li>
-      <li class="marca-chip">DoubleTree by Hilton</li>
-      <li class="marca-chip">Belcorp</li>
-      <li class="marca-chip">Éxito</li>
-      <li class="marca-chip">Hard Rock Cafe</li>
-      <li class="marca-chip">Mango</li>
-    </ul>
-    <p class="marcas-total-line">37 marcas en total confían hoy en La Caravana.</p>
-    <p>
-      La reputación y la calidad de estos clientes es parte fundamental del valor del negocio: no
-      es solo un listado de logos, es una prueba de que las marcas más exigentes del país repiten
-      con nosotros.
-    </p>
-  </section>
-
-  <section class="propuesta-section">
-    <h2>Lo que respalda el valor</h2>
-    <div class="respaldo-grid">
-      <div class="respaldo-card">
-        <span class="respaldo-label">Costo de compra de los equipos</span>
-        <span class="respaldo-value">$205,9M</span>
-        <span class="respaldo-nota">Sin vehículo — equipos importados</span>
-      </div>
-      <div class="respaldo-card">
-        <span class="respaldo-label">Valor neto en libros</span>
-        <span class="respaldo-value">$94,5M</span>
-        <span class="respaldo-nota">Corte 30/06/2026</span>
-      </div>
-      <div class="respaldo-card">
-        <span class="respaldo-label">Rango de valoración del negocio</span>
-        <span class="respaldo-value">$174M – $349M</span>
-        <span class="respaldo-nota">Múltiplo de utilidad normalizada del dueño</span>
-      </div>
+    <div class="propuesta-card">
+      <h2>Qué es hoy La Caravana</h2>
+      <p>
+        La Caravana Creativa lleva más de 10 años creando experiencias fotográficas para eventos,
+        operando en Bogotá, Cartagena, Barranquilla y Medellín. Hoy genera cerca de $200 millones de
+        ingresos al año, con equipos propios — photo booths, espejo mágico, aurora booth, anillo
+        fiestero, video 360 y más — listos para operar desde el primer día.
+      </p>
     </div>
-    <p><a class="ver-valoracion" href="index.html">Ver la valoración completa →</a></p>
+  </section>
+
+  <section class="propuesta-section">
+    <div class="propuesta-card">
+      <h2>Los clientes que confían en nosotros</h2>
+      <ul class="marcas-chip-grid">
+        <li class="marca-chip">Starbucks</li>
+        <li class="marca-chip">BMW</li>
+        <li class="marca-chip">Mercedes-Benz</li>
+        <li class="marca-chip">Coca-Cola</li>
+        <li class="marca-chip">LATAM Airlines</li>
+        <li class="marca-chip">Tiffany &amp; Co.</li>
+        <li class="marca-chip">Carolina Herrera</li>
+        <li class="marca-chip">HBO</li>
+        <li class="marca-chip">Discovery Channel</li>
+        <li class="marca-chip">Sofitel</li>
+        <li class="marca-chip">DoubleTree by Hilton</li>
+        <li class="marca-chip">Belcorp</li>
+        <li class="marca-chip">Éxito</li>
+        <li class="marca-chip">Hard Rock Cafe</li>
+        <li class="marca-chip">Mango</li>
+      </ul>
+      <p class="marcas-total-line">37 marcas en total confían hoy en La Caravana.</p>
+      <p>
+        La reputación y la calidad de estos clientes es parte fundamental del valor del negocio: no
+        es solo un listado de logos, es una prueba de que las marcas más exigentes del país repiten
+        con nosotros.
+      </p>
+    </div>
+  </section>
+
+  <section class="propuesta-section">
+    <div class="propuesta-card">
+      <h2>Lo que respalda el valor</h2>
+      <div class="respaldo-grid">
+        <div class="respaldo-card">
+          <span class="respaldo-label">Costo de compra de los equipos</span>
+          <span class="respaldo-value">$205,9M</span>
+          <span class="respaldo-nota">Sin vehículo — equipos importados</span>
+        </div>
+        <div class="respaldo-card">
+          <span class="respaldo-label">Valor neto en libros</span>
+          <span class="respaldo-value">$94,5M</span>
+          <span class="respaldo-nota">Corte 30/06/2026</span>
+        </div>
+        <div class="respaldo-card">
+          <span class="respaldo-label">Rango de valoración del negocio</span>
+          <span class="respaldo-value">$174M – $349M</span>
+          <span class="respaldo-nota">Múltiplo de utilidad normalizada del dueño</span>
+        </div>
+      </div>
+      <p class="ver-valoracion-wrap"><a class="ver-valoracion" href="index.html">Ver la valoración completa →</a></p>
+    </div>
   </section>
 
   <section class="propuesta-section propuesta-oferta">
-    <h2>La propuesta</h2>
-    <div class="oferta-card">
-      <p class="oferta-precio">Precio total: $150 millones</p>
-      <p class="oferta-pagos">$50M hoy · $50M en un año · $50M en dos años (sin intereses)</p>
-      <ul class="oferta-lista">
-        <li>
-          Es un precio por debajo del costo de compra de los equipos ($205,9M) y muy por debajo del
-          rango de valoración del negocio en marcha ($174M–$349M).
-        </li>
-        <li>
-          El negocio genera caja suficiente para que los pagos 2 y 3 salgan de la propia operación —
-          no tienes que poner ese dinero de tu bolsillo.
-        </li>
-        <li>
-          Es financiación directa: no hay bancos de por medio, ni intereses, ni trámites de crédito.
-        </li>
-        <li>
-          Y la razón más importante: trabajaste este proyecto desde el comienzo. Nadie está mejor
-          preparada para que La Caravana siga creciendo. Queremos que te quedes con el negocio, en
-          condiciones que reconozcan eso.
-        </li>
-      </ul>
+    <div class="propuesta-card">
+      <div class="oferta-card-inner">
+        <h2>La propuesta</h2>
+        <p class="oferta-precio-label">Precio total</p>
+        <p class="oferta-precio">$150 millones</p>
+        <div class="oferta-pagos-grid">
+          <div class="oferta-pago-pill">$50M hoy</div>
+          <div class="oferta-pago-pill">$50M en un año</div>
+          <div class="oferta-pago-pill">$50M en dos años</div>
+        </div>
+        <p class="oferta-pagos-nota">(sin intereses)</p>
+        <ul class="oferta-lista">
+          <li>
+            Es un precio por debajo del costo de compra de los equipos ($205,9M) y muy por debajo del
+            rango de valoración del negocio en marcha ($174M–$349M).
+          </li>
+          <li>
+            El negocio genera caja suficiente para que los pagos 2 y 3 salgan de la propia operación —
+            no tienes que poner ese dinero de tu bolsillo.
+          </li>
+          <li>
+            Es financiación directa: no hay bancos de por medio, ni intereses, ni trámites de crédito.
+          </li>
+          <li>
+            Y la razón más importante: trabajaste este proyecto desde el comienzo. Nadie está mejor
+            preparada para que La Caravana siga creciendo. Queremos que te quedes con el negocio, en
+            condiciones que reconozcan eso.
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
