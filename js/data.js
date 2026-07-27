@@ -334,7 +334,26 @@ const DATA = {
     contactoEmail: 'eventos@lacaravanacreativa.com',
     whatsapp: '320 479 4324',
     ciudades: ['Bogotá', 'Cartagena', 'Barranquilla', 'Medellín'],
-    marcas: [], // se llenará en una tarea posterior
+    // ── Marcas clientes [Fuente: "clientes_investigacion.md", carpeta
+    //    leon/la caravana/, investigación 2026-07-26] ───────────────────────
+    // 37 marcas VERIFICADAS: aparecen como logo en la sección "Nuestros
+    // Clientes" del sitio oficial lacaravanacreativa.com/nuestros-clientes
+    // (evidencia de primera mano — el propio proveedor las exhibe como
+    // clientes; no hay corroboración independiente de prensa/redes por marca,
+    // pero el hecho de estar en su propia página sí queda documentado).
+    marcas: [
+      'Starbucks', 'DoubleTree by Hilton', 'Sofitel Bogotá Victoria Regia',
+      'Hard Rock Cafe', 'BMW', 'Mercedes-Benz', 'Coca-Cola', 'Águila',
+      'Éxito', 'Mango', 'Stradivarius', 'Steve Madden', 'Coach',
+      'Tiffany & Co.', 'Carolina Herrera', 'Azulu', "Kiehl's", 'Belcorp',
+      'MASGLO Belleza Profesional', 'Blush-Bar', 'LATAM Airlines',
+      'SeePuertoRico.com', 'Discovery Channel', 'HBO',
+      'Discovery Home & Health', 'Janssen (Johnson & Johnson)',
+      'Merqueo.com', 'Newell Rubbermaid', 'Racafe & Cia S.C.A.', 'OLAFAM',
+      'Credicorp Capital', 'SAP Business One', 'REM Construcciones',
+      'Prabyc Ingenieros', 'Cámara de Comercio de Bogotá',
+      'La Casa de Ronald McDonald', 'Elements',
+    ],
   },
 
   // ── Supuestos por defecto para los cálculos de valoración [Fuente D] ──────

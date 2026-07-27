@@ -373,15 +373,31 @@ function buildActivosHTML() {
 }
 
 // ---------------------------------------------------------------------------
-// Sección 4 — Marcas que son clientes
+// Sección 4 — Marcas que son clientes: un pilar de valor, no una galería.
+// Argumento del dueño: la calidad de los clientes y la reputación del
+// negocio son un pedazo fundamental del valor y del potencial. Diez años
+// sirviendo marcas premium (hoteles 5 estrellas, automotrices de lujo, moda,
+// medios, aerolíneas) y matrimonios construyeron una confianza y una
+// recompra corporativa que no aparecen en ningún balance, pero son un
+// activo tan real como los equipos o el efectivo.
 // ---------------------------------------------------------------------------
 function buildMarcasHTML() {
-  const marcas = (DATA.empresa && DATA.empresa.marcas) || DATA.marcas || [];
-  const body = marcas.length === 0
-    ? '<div class="marca-placeholder">Portafolio de clientes corporativos — logos por confirmar.</div>'
-    : '<div class="marcas-grid">' + marcas.map(function (m) { return '<div class="marca-item">' + m + '</div>'; }).join('') + '</div>';
+  const marcas = (DATA.empresa && DATA.empresa.marcas) || [];
+  const chips = marcas.map(function (m) {
+    return '<li class="marca-chip">' + m + '</li>';
+  }).join('');
 
-  return '<h2>4. Marcas que son clientes</h2>' + body;
+  return (
+    '<h2>4. Marcas que son clientes</h2>' +
+    '<p class="section-lead">La calidad de los clientes y la reputación del negocio son un pedazo ' +
+      'fundamental del valor y del potencial de La Caravana. Durante más de 10 años la empresa ha ' +
+      'servido marcas premium — hoteles 5 estrellas, automotrices de lujo, moda, medios, aerolíneas — ' +
+      'y también matrimonios. Esa confianza y la recompra corporativa que genera son un activo ' +
+      'intangible que no aparece en el balance, pero que es tan real como cualquier otro activo del negocio.</p>' +
+    '<ul class="marcas-chip-grid">' + chips + '</ul>' +
+    '<p class="marcas-closing">Hoy existe una relación directa con las áreas de marketing y eventos ' +
+      'de estas marcas: es, en la práctica, un canal comercial ya construido.</p>'
+  );
 }
 
 // ---------------------------------------------------------------------------
