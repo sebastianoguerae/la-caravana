@@ -383,8 +383,13 @@ function buildActivosHTML() {
 // ---------------------------------------------------------------------------
 function buildMarcasHTML() {
   const marcas = (DATA.empresa && DATA.empresa.marcas) || [];
-  const chips = marcas.map(function (m) {
-    return '<li class="marca-chip">' + m + '</li>';
+  const items = marcas.map(function (m) {
+    if (m && m.logo) {
+      return '<li class="marca-logo-tile"><img src="assets/clientes/' + m.logo + '" alt="' + m.nombre +
+        '" title="' + m.nombre + '" loading="lazy"></li>';
+    }
+    const nombre = (m && m.nombre) || m;
+    return '<li class="marca-chip">' + nombre + '</li>';
   }).join('');
 
   return (
@@ -394,7 +399,7 @@ function buildMarcasHTML() {
       'servido marcas premium — hoteles 5 estrellas, automotrices de lujo, moda, medios, aerolíneas — ' +
       'y también matrimonios. Esa confianza y la recompra corporativa que genera son un activo ' +
       'intangible que no aparece en el balance, pero que es tan real como cualquier otro activo del negocio.</p>' +
-    '<ul class="marcas-chip-grid">' + chips + '</ul>' +
+    '<ul class="marcas-logo-grid">' + items + '</ul>' +
     '<p class="marcas-closing">Hoy existe una relación directa con las áreas de marketing y eventos ' +
       'de estas marcas: es, en la práctica, un canal comercial ya construido.</p>'
   );

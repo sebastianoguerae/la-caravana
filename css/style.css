@@ -575,6 +575,36 @@ body.mode-buyer .owner-only {
   margin: 0;
 }
 
+/* Marcas — grilla de logos (tiles claros para que se lean sobre el tema oscuro) */
+
+.marcas-logo-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  padding: 0;
+  margin: 20px 0 24px;
+}
+
+.marca-logo-tile {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+}
+
+.marca-logo-tile img {
+  max-width: 100%;
+  max-height: 48px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 /* --- Secciones 5-7: normalización, valoración, rango de valor --- */
 
 .disclosure-note {

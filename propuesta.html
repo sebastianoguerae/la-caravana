@@ -165,6 +165,34 @@
     border: 1.5px solid transparent;
   }
 
+  .marcas-logo-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    margin: 4px 0 18px;
+    padding: 0;
+  }
+
+  .marca-logo-tile {
+    background: #faf8fb;
+    border: 1px solid rgba(168, 107, 201, 0.2);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+  }
+
+  .marca-logo-tile img {
+    max-width: 100%;
+    max-height: 40px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
   .respaldo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -371,22 +399,44 @@
   <section class="propuesta-section">
     <div class="propuesta-card">
       <h2>Los clientes que confían en nosotros</h2>
-      <ul class="marcas-chip-grid">
-        <li class="marca-chip">Starbucks</li>
-        <li class="marca-chip">BMW</li>
-        <li class="marca-chip">Mercedes-Benz</li>
-        <li class="marca-chip">Coca-Cola</li>
-        <li class="marca-chip">LATAM Airlines</li>
-        <li class="marca-chip">Tiffany &amp; Co.</li>
-        <li class="marca-chip">Carolina Herrera</li>
-        <li class="marca-chip">HBO</li>
-        <li class="marca-chip">Discovery Channel</li>
-        <li class="marca-chip">Sofitel</li>
-        <li class="marca-chip">DoubleTree by Hilton</li>
-        <li class="marca-chip">Belcorp</li>
-        <li class="marca-chip">Éxito</li>
-        <li class="marca-chip">Hard Rock Cafe</li>
-        <li class="marca-chip">Mango</li>
+      <ul class="marcas-logo-grid">
+        <li class="marca-logo-tile"><img src="assets/clientes/starbucks.jpeg" alt="Starbucks" title="Starbucks" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/doubletree-by-hilton.jpg" alt="DoubleTree by Hilton" title="DoubleTree by Hilton" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/sofitel-bogota-victoria-regia.jpg" alt="Sofitel Bogotá Victoria Regia" title="Sofitel Bogotá Victoria Regia" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/hard-rock-cafe.png" alt="Hard Rock Cafe" title="Hard Rock Cafe" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/bmw.png" alt="BMW" title="BMW" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/mercedes-benz.jpg" alt="Mercedes-Benz" title="Mercedes-Benz" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/coca-cola.jpg" alt="Coca-Cola" title="Coca-Cola" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/aguila.jpg" alt="Águila" title="Águila" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/exito.png" alt="Éxito" title="Éxito" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/mango.png" alt="Mango" title="Mango" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/stradivarius.png" alt="Stradivarius" title="Stradivarius" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/steve-madden.png" alt="Steve Madden" title="Steve Madden" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/coach.png" alt="Coach" title="Coach" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/tiffany-and-co.png" alt="Tiffany &amp; Co." title="Tiffany &amp; Co." loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/carolina-herrera.jpg" alt="Carolina Herrera" title="Carolina Herrera" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/azulu.png" alt="Azulu" title="Azulu" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/kiehls.png" alt="Kiehl's" title="Kiehl's" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/belcorp.jpg" alt="Belcorp" title="Belcorp" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/masglo-belleza-profesional.png" alt="MASGLO Belleza Profesional" title="MASGLO Belleza Profesional" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/blush-bar.png" alt="Blush-Bar" title="Blush-Bar" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/latam-airlines.jpg" alt="LATAM Airlines" title="LATAM Airlines" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/see-puerto-rico.png" alt="SeePuertoRico.com" title="SeePuertoRico.com" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/discovery-channel.png" alt="Discovery Channel" title="Discovery Channel" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/hbo.jpg" alt="HBO" title="HBO" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/discovery-home-and-health.png" alt="Discovery Home &amp; Health" title="Discovery Home &amp; Health" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/janssen.png" alt="Janssen (Johnson &amp; Johnson)" title="Janssen (Johnson &amp; Johnson)" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/merqueo.png" alt="Merqueo.com" title="Merqueo.com" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/newell-rubbermaid.jpg" alt="Newell Rubbermaid" title="Newell Rubbermaid" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/racafe.png" alt="Racafe &amp; Cia S.C.A." title="Racafe &amp; Cia S.C.A." loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/olafam.jpg" alt="OLAFAM" title="OLAFAM" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/credicorp-capital.jpg" alt="Credicorp Capital" title="Credicorp Capital" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/sap-business-one.png" alt="SAP Business One" title="SAP Business One" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/rem-construcciones.jpeg" alt="REM Construcciones" title="REM Construcciones" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/prabyc-ingenieros.png" alt="Prabyc Ingenieros" title="Prabyc Ingenieros" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/camara-comercio-bogota.png" alt="Cámara de Comercio de Bogotá" title="Cámara de Comercio de Bogotá" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/casa-ronald-mcdonald.jpeg" alt="La Casa de Ronald McDonald" title="La Casa de Ronald McDonald" loading="lazy"></li>
+        <li class="marca-logo-tile"><img src="assets/clientes/elements.png" alt="Elements" title="Elements" loading="lazy"></li>
       </ul>
       <p class="marcas-total-line">37 marcas en total confían hoy en La Caravana.</p>
       <p>
