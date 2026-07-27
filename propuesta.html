@@ -193,6 +193,40 @@
     object-fit: contain;
   }
 
+  .lentes-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 18px 0 20px;
+  }
+
+  .lente-mini-card {
+    background: linear-gradient(160deg, #fdf1f7, #fef4ea);
+    border: 1px solid rgba(168, 107, 201, 0.25);
+    border-radius: 18px;
+    padding: 18px 20px;
+  }
+
+  .lente-mini-card h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .lente-mini-card p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .lentes-cierre {
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: 1rem;
+  }
+
   .respaldo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -468,6 +502,43 @@
         </div>
       </div>
       <p class="ver-valoracion-wrap"><a class="ver-valoracion" href="index.html">Ver la valoración completa →</a></p>
+    </div>
+  </section>
+
+  <section class="propuesta-section">
+    <div class="propuesta-card">
+      <h2>Cómo llegamos al valor</h2>
+      <p>
+        El valor se estimó con tres lentes independientes, documentadas en detalle en la
+        <a href="index.html">valoración completa</a>.
+      </p>
+      <div class="lentes-mini-grid">
+        <div class="lente-mini-card">
+          <h3>Lente 1 — Activos</h3>
+          <p>
+            Los equipos costaron $205,9M puestos en Colombia (importados); su valor neto en libros
+            hoy es $94,5M (corte 30/06/2026). Es el piso del valor.
+          </p>
+        </div>
+        <div class="lente-mini-card">
+          <h3>Lente 2 — Múltiplo de utilidad (la principal)</h3>
+          <p>
+            La utilidad real anual normalizada del negocio para su dueño (SDE) es ≈ $116M — se
+            obtiene partiendo del resultado contable y sumando los ajustes estándar de
+            normalización (salarios de las socias que salieron de la operación, depreciación,
+            gastos financieros de deuda ya extinta y honorarios sobredimensionados). Negocios de
+            servicios de este tamaño se venden entre 1,5× y 3,0× esa utilidad: $174M–$349M.
+          </p>
+        </div>
+        <div class="lente-mini-card">
+          <h3>Lente 3 — Flujo de caja descontado</h3>
+          <p>
+            Proyectando 5 años con tasa de descuento del 30%, el valor sale entre $364M y $454M
+            según el escenario — valida que el rango del múltiplo es conservador.
+          </p>
+        </div>
+      </div>
+      <p class="lentes-cierre"><strong>El precio de esta propuesta ($150M) está por debajo de las tres lentes.</strong></p>
     </div>
   </section>
 
