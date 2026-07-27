@@ -377,7 +377,8 @@ const DATA = {
       { nombre: 'HBO', logo: 'hbo.jpg' },
       { nombre: 'Discovery Home & Health', logo: 'discovery-home-and-health.png' },
       { nombre: 'Janssen (Johnson & Johnson)', logo: 'janssen.png' },
-      { nombre: 'Merqueo.com', logo: 'merqueo.png' },
+      // reemplaza a Merqueo por indicación del dueño 26-jul-2026
+      { nombre: 'Bavaria', logo: 'bavaria.png' },
       { nombre: 'Newell Rubbermaid', logo: 'newell-rubbermaid.jpg' },
       { nombre: 'Racafe & Cia S.C.A.', logo: 'racafe.png' },
       { nombre: 'OLAFAM', logo: 'olafam.jpg' },
