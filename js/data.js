@@ -336,11 +336,16 @@ const DATA = {
     ciudades: ['Bogotá', 'Cartagena', 'Barranquilla', 'Medellín'],
     // ── Marcas clientes [Fuente: "clientes_investigacion.md", carpeta
     //    leon/la caravana/, investigación 2026-07-26] ───────────────────────
-    // 37 marcas VERIFICADAS: aparecen como logo en la sección "Nuestros
+    // 39 marcas VERIFICADAS: aparecen como logo en la sección "Nuestros
     // Clientes" del sitio oficial lacaravanacreativa.com/nuestros-clientes
     // (evidencia de primera mano — el propio proveedor las exhibe como
     // clientes; no hay corroboración independiente de prensa/redes por marca,
     // pero el hecho de estar en su propia página sí queda documentado).
+    // Nota: las 37 primeras salieron de la investigación inicial (26-jul-2026,
+    // clientes_investigacion.md); Pfizer y "Revealed" se identificaron después,
+    // en el mismo muro de logos del sitio, al descargar los archivos uno a uno
+    // para el tratamiento visual del documento — mismo origen y mismo nivel de
+    // evidencia (logo en lacaravanacreativa.com/nuestros-clientes) que las demás.
     // `logo` = archivo descargado directamente del CDN de Wix del sitio
     // oficial (assets/clientes/), identificado visualmente uno a uno (el
     // sitio no trae texto alt). `null` = no se pudo descargar/identificar
@@ -383,6 +388,8 @@ const DATA = {
       { nombre: 'Cámara de Comercio de Bogotá', logo: 'camara-comercio-bogota.png' },
       { nombre: 'La Casa de Ronald McDonald', logo: 'casa-ronald-mcdonald.jpeg' },
       { nombre: 'Elements', logo: 'elements.png' },
+      { nombre: 'Pfizer', logo: 'pfizer.gif' },
+      { nombre: 'Revealed', logo: 'revealed.jpg' },
     ],
   },
 
