@@ -262,6 +262,47 @@
     margin-top: 6px;
   }
 
+  .respaldo-grid-equipos {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .respaldo-subvalor {
+    margin: 10px 0;
+  }
+
+  .respaldo-subvalor:first-of-type {
+    margin-top: 4px;
+  }
+
+  .respaldo-subvalor .respaldo-sublabel {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    margin-bottom: 2px;
+  }
+
+  .respaldo-subvalor .respaldo-value-sm {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .incluye-block {
+    margin: 0 0 18px;
+  }
+
+  .incluye-block:last-child {
+    margin-bottom: 0;
+  }
+
+  .incluye-block h3 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
   .ver-valoracion-wrap {
     text-align: center;
     margin-top: 22px;
@@ -486,16 +527,18 @@
   <section class="propuesta-section">
     <div class="propuesta-card">
       <h2>Lo que respalda el valor</h2>
-      <div class="respaldo-grid">
+      <div class="respaldo-grid respaldo-grid-equipos">
         <div class="respaldo-card">
-          <span class="respaldo-label">Costo de compra de los equipos</span>
-          <span class="respaldo-value">$205,9M</span>
-          <span class="respaldo-nota">Sin vehículo — equipos importados</span>
-        </div>
-        <div class="respaldo-card">
-          <span class="respaldo-label">Valor neto en libros</span>
-          <span class="respaldo-value">$94,5M</span>
-          <span class="respaldo-nota">Corte 30/06/2026</span>
+          <span class="respaldo-label">Valor de los equipos</span>
+          <div class="respaldo-subvalor">
+            <span class="respaldo-sublabel">Valor bruto (costo de compra):</span>
+            <span class="respaldo-value-sm">$205,9M</span>
+          </div>
+          <div class="respaldo-subvalor">
+            <span class="respaldo-sublabel">Valor neto en libros:</span>
+            <span class="respaldo-value-sm">$94,5M</span>
+          </div>
+          <span class="respaldo-nota">El neto es el valor después de restar las depreciaciones acumuladas por los años de uso (corte 30/06/2026).</span>
         </div>
         <div class="respaldo-card">
           <span class="respaldo-label">Rango de valoración del negocio</span>
@@ -541,6 +584,34 @@
         </div>
       </div>
       <p class="lentes-cierre"><strong>El precio de esta propuesta ($150M) está por debajo de las tres lentes.</strong></p>
+    </div>
+  </section>
+
+  <section class="propuesta-section">
+    <div class="propuesta-card">
+      <h2>Qué incluye esta propuesta</h2>
+      <div class="incluye-block">
+        <h3>Incluye</h3>
+        <p>
+          Todos los equipos de operación (4 photo booths, espejo mágico, aurora booth, anillo
+          fiestero, plataforma de video 360, hashtag spot), con sus cámaras, impresoras, tablets y
+          accesorios; la página web lacaravanacreativa.com; la cuenta de Instagram
+          <strong>@LaCaravanaPhotoBooth</strong> con su comunidad; y la base y relación de clientes
+          construida en 10 años.
+        </p>
+      </div>
+      <div class="incluye-block">
+        <h3>No incluye</h3>
+        <p>El vehículo (campero) — queda por fuera de la operación.</p>
+      </div>
+      <div class="incluye-block">
+        <h3>La marca</h3>
+        <p>
+          Sobre el nombre y la marca Caravana: tendremos que ponernos de acuerdo en su manejo,
+          porque nosotros queremos seguir usándola para la casa de Anzures (Casa Caravana). La idea
+          es encontrar juntos un esquema donde ambos proyectos convivan bien.
+        </p>
+      </div>
     </div>
   </section>
 
