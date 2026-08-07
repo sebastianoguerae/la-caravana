@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Caravana Creativa — Escenarios de ganancia</title>
+<style>
+  :root {
+    --grad-purple: #a86bc9;
+    --grad-pink: #ec6ead;
+    --grad-orange: #f9a15f;
+    --grad-orange2: #fbb040;
+    --brand-gradient: linear-gradient(135deg, var(--grad-purple) 0%, var(--grad-pink) 45%, var(--grad-orange) 75%, var(--grad-orange2) 100%);
+    --ink: #3a2a3a;
+    --ink-soft: #6b5468;
+    --card-bg: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: ui-rounded, "SF Pro Rounded", "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    background: var(--brand-gradient);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before, body::after {
+    content: "";
+    position: fixed;
+    width: 420px;
+    height: 420px;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.55) 3px, transparent 3.5px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(circle at 0 0, black 0%, transparent 70%);
+            mask-image: radial-gradient(circle at 0 0, black 0%, transparent 70%);
+    z-index: 0;
+  }
+  body::before { top: 0; left: 0; }
+  body::after { bottom: 0; right: 0; transform: rotate(180deg); }
+
+  .main {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 24px 90px;
+  }
+
+  .header { text-align: center; margin-bottom: 44px; color: #fff; }
+  .header .logo { font-size: 3.4rem; line-height: 1; margin-bottom: 6px; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.18)); }
+  .header h1 {
+    font-size: 2.1rem; letter-spacing: 0.02em; margin: 4px 0 2px;
+    text-transform: uppercase; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .header .brand-sub {
+    font-size: 1rem; letter-spacing: 0.35em; text-transform: uppercase;
+    font-weight: 600; margin: 0 0 16px; opacity: 0.95; text-shadow: 0 1px 6px rgba(0,0,0,0.18);
+  }
+  .header .subtitle {
+    color: rgba(255,255,255,0.95); font-size: 1.08rem; max-width: 560px;
+    margin: 0 auto; text-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    box-shadow: 0 18px 40px rgba(90, 30, 70, 0.22);
+    padding: 32px 30px;
+    margin: 0 0 28px;
+  }
+
+  .card h2 {
+    margin: 0 0 14px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .card h3 { margin: 0 0 8px; font-size: 1.02rem; font-weight: 800; }
+  .card p { line-height: 1.62; margin: 0 0 14px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  .lead { font-size: 1.06rem; }
+
+  /* ── motor de la ganancia ─────────────────────────────────────────── */
+  .motor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 14px;
+    margin: 18px 0 6px;
+  }
+  .motor-card {
+    background: linear-gradient(135deg, rgba(168,107,201,0.10), rgba(249,161,95,0.13));
+    border-radius: 16px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .motor-label { display: block; font-size: 0.82rem; color: var(--ink-soft); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .motor-value { display: block; font-size: 1.6rem; font-weight: 800; margin: 6px 0 4px; }
+  .motor-nota { display: block; font-size: 0.82rem; color: var(--ink-soft); line-height: 1.4; }
+
+  /* ── control de ticket ────────────────────────────────────────────── */
+  .control {
+    margin: 22px 0 4px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: #faf6fb;
+    border: 1px solid #f0e4f2;
+  }
+  .control-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .control-top label { font-weight: 800; font-size: 0.95rem; }
+  .control-top .valor { font-size: 1.25rem; font-weight: 800; color: #b3459b; }
+  .control input[type="range"] { width: 100%; margin-top: 12px; accent-color: var(--grad-pink); }
+  .control-nota { margin: 10px 0 0; font-size: 0.86rem; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ── tabla de escenarios ──────────────────────────────────────────── */
+  .tabla-wrap { overflow-x: auto; margin: 18px 0 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 0.94rem; }
+  thead th {
+    text-align: right;
+    padding: 12px 10px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    border-bottom: 2px solid #f0e4f2;
+  }
+  thead th:first-child { text-align: left; }
+  tbody td { padding: 13px 10px; text-align: right; border-bottom: 1px solid #f6eef7; font-variant-numeric: tabular-nums; }
+  tbody td:first-child { text-align: left; font-weight: 800; }
+  tbody tr.destacada { background: linear-gradient(135deg, rgba(168,107,201,0.10), rgba(249,161,95,0.13)); }
+  tbody tr.destacada td:first-child { border-radius: 12px 0 0 12px; }
+  tbody tr.destacada td:last-child { border-radius: 0 12px 12px 0; }
+  td.utilidad { font-weight: 800; color: #7a2f8f; }
+  .escenario-tag { display: block; font-size: 0.76rem; font-weight: 600; color: var(--ink-soft); text-transform: none; letter-spacing: 0; }
+
+  /* ── barras ───────────────────────────────────────────────────────── */
+  .barras { margin: 22px 0 0; display: grid; gap: 12px; }
+  .barra-fila { display: grid; grid-template-columns: 92px 1fr; align-items: center; gap: 12px; }
+  .barra-etq { font-weight: 800; font-size: 0.9rem; }
+  .barra-etq small { display: block; font-weight: 600; color: var(--ink-soft); font-size: 0.76rem; }
+  .barra-track { background: #f6eef7; border-radius: 999px; height: 34px; position: relative; overflow: hidden; }
+  .barra-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--brand-gradient);
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 12px;
+    color: #fff; font-weight: 800; font-size: 0.86rem;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    transition: width 0.25s ease;
+    min-width: 92px;
+  }
+
+  /* ── callouts ─────────────────────────────────────────────────────── */
+  .callout {
+    margin: 20px 0 0;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(168,107,201,0.12), rgba(249,161,95,0.14));
+    border-left: 4px solid var(--grad-pink);
+  }
+  .callout p { margin: 0 0 10px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .nota {
+    margin: 18px 0 0;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: #fbf8fb;
+    border: 1px dashed #e6d3e8;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.58;
+  }
+  .nota strong { color: var(--ink); }
+
+  ul.limpia { margin: 0; padding-left: 20px; line-height: 1.62; }
+  ul.limpia li { margin-bottom: 10px; }
+  ul.limpia li:last-child { margin-bottom: 0; }
+
+  .links { text-align: center; margin: 4px 0 0; }
+  .links a {
+    display: inline-block;
+    margin: 6px 8px;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 999px;
+    padding: 10px 20px;
+    backdrop-filter: blur(4px);
+  }
+  .links a:hover { background: rgba(255,255,255,0.32); }
+
+  .cierre { text-align: center; color: #fff; font-size: 1.02rem; max-width: 620px; margin: 34px auto 0; text-shadow: 0 1px 6px rgba(0,0,0,0.18); line-height: 1.6; }
+
+  @media (max-width: 600px) {
+    .main { padding: 40px 16px 70px; }
+    .card { padding: 24px 20px; border-radius: 20px; }
+    .barra-fila { grid-template-columns: 78px 1fr; }
+  }
+
+  @media print {
+    body { background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .header { color: var(--ink); text-shadow: none; }
+    .card { box-shadow: none; border: 1px solid #eee; }
+    .control { display: none; }
+    .cierre { color: var(--ink); text-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<main class="main">
+
+  <header class="header">
+    <div class="logo" aria-hidden="true">🐘</div>
+    <h1>La Caravana</h1>
+    <p class="brand-sub">Creativa</p>
+    <p class="subtitle">Cuánto puede ganar el negocio — escenarios de 8 a 30 eventos al mes</p>
+  </header>
+
+  <section>
+    <div class="card">
+      <h2>La idea en una frase</h2>
+      <p class="lead">
+        Los equipos ya están comprados y pagos. El nombre y los clientes ya existen. Por eso
+        <strong>cada evento adicional que se hace no cuesta casi nada extra</strong>: de cada
+        $100 que entra por un evento nuevo, cerca de <strong>$67 se quedan como ganancia</strong>.
+        El negocio no necesita inversión para crecer — necesita agenda.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>El motor de la ganancia</h2>
+      <p>
+        Así se comporta la plata en La Caravana, con las cifras reales del año 2025:
+      </p>
+      <div class="motor-grid">
+        <div class="motor-card">
+          <span class="motor-label">Entra por evento</span>
+          <span class="motor-value" id="m-ticket">$1,70M</span>
+          <span class="motor-nota">Precio promedio de un evento</span>
+        </div>
+        <div class="motor-card">
+          <span class="motor-label">Cuesta ese evento</span>
+          <span class="motor-value" id="m-variable">$0,57M</span>
+          <span class="motor-nota">Operarios, transporte, tinta, papel e insumos — 33% del ingreso</span>
+        </div>
+        <div class="motor-card">
+          <span class="motor-label">Queda de cada evento</span>
+          <span class="motor-value" id="m-contrib">$1,13M</span>
+          <span class="motor-nota">Ganancia limpia que deja cada evento</span>
+        </div>
+        <div class="motor-card">
+          <span class="motor-label">Gastos fijos del mes</span>
+          <span class="motor-value">$4,0M</span>
+          <span class="motor-nota">Bodega, servicios, contabilidad, seguros y mantenimiento — no cambian si hay más eventos</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>
+          <strong>Punto de equilibrio: <span id="equilibrio">4</span> eventos al mes.</strong>
+          Con eso se pagan todos los gastos fijos. <strong>Del quinto evento en adelante, todo es
+          ganancia.</strong>
+        </p>
+      </div>
+
+      <div class="control">
+        <div class="control-top">
+          <label for="ticket">Precio promedio por evento</label>
+          <span class="valor" id="ticket-label">$1,70 millones</span>
+        </div>
+        <input type="range" id="ticket" min="1.4" max="2.6" step="0.05" value="1.7">
+        <p class="control-nota">
+          Mueve la barra para ver cómo cambian todos los escenarios si el precio promedio sube o
+          baja. Hoy el promedio es de $1,70M por evento.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Los escenarios</h2>
+      <p>
+        Cinco niveles de actividad, del más prudente al más ambicioso. Hoy el negocio hace
+        <strong><span id="hoy-eventos">9,5</span> eventos al mes</strong> en promedio.
+      </p>
+
+      <div class="tabla-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Eventos<br>al mes</th>
+              <th>Ingresos<br>al mes</th>
+              <th>Ingresos<br>al año</th>
+              <th>Ganancia<br>al mes</th>
+              <th>Ganancia<br>al año</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-body"></tbody>
+        </table>
+      </div>
+
+      <div class="barras" id="barras"></div>
+
+      <p class="nota">
+        <strong>Cómo leer la ganancia:</strong> es lo que se lleva la dueña del negocio al año,
+        antes de impuestos — incluye su propio sueldo y su utilidad juntos. Es la forma estándar de
+        medir un negocio operado por su dueño.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Y si toca reforzar el equipo</h2>
+      <p>
+        De <strong>15 eventos al mes</strong> en adelante ya no alcanza una sola persona coordinando:
+        haría falta un coordinador de tiempo completo (≈$3M al mes), y pasando de 25 eventos,
+        dos personas. Este es el escenario prudente, ya con ese costo descontado:
+      </p>
+      <div class="tabla-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Eventos<br>al mes</th>
+              <th>Refuerzo<br>de equipo</th>
+              <th>Ganancia al año<br>(sin refuerzo)</th>
+              <th>Ganancia al año<br>(escenario prudente)</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-prudente"></tbody>
+        </table>
+      </div>
+      <p class="nota">
+        Aun en el escenario más conservador, <strong>crecer sigue siendo enormemente rentable</strong>:
+        el costo del equipo adicional se paga con menos de 3 eventos al mes.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Qué se necesita para llegar ahí</h2>
+      <p>
+        Ninguno de estos escenarios pide comprar equipos nuevos ni abrir una oficina. Todos se hacen
+        con lo que ya está:
+      </p>
+      <ul class="limpia">
+        <li>
+          <strong>Volver a activar la base de clientes.</strong> 39 marcas y diez años de contactos
+          que ya nos conocen. Una campaña ordenada de reactivación — llamar, escribir, recordar —
+          es el camino más barato a los primeros eventos adicionales.
+        </li>
+        <li>
+          <strong>Alianzas con hoteles y organizadores de eventos.</strong> Un solo hotel o wedding
+          planner activo puede significar 2 o 3 eventos al mes de forma recurrente.
+        </li>
+        <li>
+          <strong>Operar varios equipos en paralelo.</strong> Hay 4 photo booths, espejo mágico,
+          aurora booth, anillo fiestero, video 360 y hashtag spot. Un sábado se pueden atender
+          varios eventos a la vez — hoy eso casi no se aprovecha.
+        </li>
+        <li>
+          <strong>Vender más de un equipo por evento.</strong> Subir el ticket promedio ofreciendo
+          combos (booth + video 360 + hashtag spot) sube la ganancia sin sumar un solo evento nuevo.
+        </li>
+        <li>
+          <strong>Instagram y contenido.</strong> @LaCaravanaPhotoBooth ya tiene comunidad; publicar
+          cada evento es el canal de venta más barato que existe en este negocio.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Qué significa esto para la compra</h2>
+      <p>
+        El precio de la propuesta es <strong>$200 millones, en cuatro pagos iguales de $50 millones</strong>
+        (hoy, al año, a los dos años y a los tres años, sin intereses).
+      </p>
+      <div class="callout">
+        <p>
+          Con solo <strong>10 eventos al mes</strong> —apenas por encima de lo que el negocio hace
+          hoy— la ganancia del año es de <strong><span id="cierre-10">$88M</span></strong>. Eso paga
+          la cuota anual de $50M <strong>y todavía deja <span id="cierre-10-neto">$38M</span> libres</strong>.
+        </p>
+        <p>
+          Con <strong>15 eventos al mes</strong> la ganancia sube a
+          <strong><span id="cierre-15">$156M</span></strong> al año: el negocio se paga solo en poco
+          más de un año.
+        </p>
+      </div>
+      <p class="nota" style="margin-top:18px;">
+        <strong>De dónde salen estas cifras.</strong> Todo se calcula con los estados financieros
+        reales de 2025: ingresos operacionales de $193,6M, costos directos de $64,6M (33% de los
+        ingresos) y gastos fijos de operación de $48M al año — estos últimos ya sin los sueldos de
+        las socias, que salen de la operación con la venta, y sin la depreciación, que no es salida
+        de plata. Son proyecciones, no promesas: dependen de cuántos eventos se logren vender.
+      </p>
+    </div>
+  </section>
+
+  <p class="links">
+    <a href="propuesta.html">← Volver a la propuesta</a>
+    <a href="index.html">Ver la valoración completa</a>
+  </p>
+
+  <p class="cierre">
+    El trabajo difícil —construir el nombre, los clientes y el portafolio de equipos— ya está hecho.
+    Lo que sigue es venderlo.
+  </p>
+
+</main>
+
+<script>
+(function () {
+  // ── Cifras base, de los estados financieros 2025 ────────────────────
+  const INGRESOS_2025 = 193582687;          // ingresos operacionales 2025
+  const COSTOS_2025 = 64609016.55;          // costos directos 2025 (variables por evento)
+  const PCT_VARIABLE = COSTOS_2025 / INGRESOS_2025;             // ≈ 0.3338
+  const FIJOS_MES = (143258250.11 - 80967506 - 14335607.04) / 12; // gastos admin − sueldos socias − depreciación
+  const ESCENARIOS = [8, 10, 15, 20, 30];
+  // Refuerzo de equipo necesario a partir de cierto volumen (COP/mes)
+  const REFUERZO = { 8: 0, 10: 0, 15: 3000000, 20: 3000000, 30: 6000000 };
+
+  const fmtM = (v, dec) => '$' + (v / 1e6).toFixed(dec === undefined ? 1 : dec).replace('.', ',') + 'M';
+
+  const el = (id) => document.getElementById(id);
+
+  // `ticketM` llega en millones (el slider); internamente todo se opera en COP.
+  function calcular(ticketM) {
+    const ticket = ticketM * 1e6;
+    const variable = ticket * PCT_VARIABLE;
+    const contrib = ticket - variable;
+    return {
+      ticket, variable, contrib,
+      equilibrio: Math.ceil(FIJOS_MES / contrib),
+      hoyEventos: INGRESOS_2025 / 12 / ticket,
+      filas: ESCENARIOS.map((n) => {
+        const ingresosMes = n * ticket;
+        const utilidadMes = n * contrib - FIJOS_MES;
+        const refuerzo = REFUERZO[n] || 0;
+        return {
+          n, ingresosMes,
+          ingresosAnio: ingresosMes * 12,
+          utilidadMes,
+          utilidadAnio: utilidadMes * 12,
+          refuerzo,
+          utilidadAnioPrudente: (utilidadMes - refuerzo) * 12,
+        };
+      }),
+    };
+  }
+
+  function render(ticket) {
+    const r = calcular(ticket);
+
+    el('ticket-label').textContent = '$' + ticket.toFixed(2).replace('.', ',') + ' millones';
+    el('m-ticket').textContent = fmtM(r.ticket, 2);
+    el('m-variable').textContent = fmtM(r.variable, 2);
+    el('m-contrib').textContent = fmtM(r.contrib, 2);
+    el('equilibrio').textContent = r.equilibrio;
+    el('hoy-eventos').textContent = r.hoyEventos.toFixed(1).replace('.', ',');
+
+    // Tabla principal
+    el('tabla-body').innerHTML = r.filas.map((f) => {
+      const cerca = Math.abs(f.n - r.hoyEventos) < 1.5;
+      return '<tr class="' + (cerca ? 'destacada' : '') + '">' +
+        '<td>' + f.n + (cerca ? '<span class="escenario-tag">nivel de hoy</span>' : '') + '</td>' +
+        '<td>' + fmtM(f.ingresosMes) + '</td>' +
+        '<td>' + fmtM(f.ingresosAnio) + '</td>' +
+        '<td>' + fmtM(f.utilidadMes) + '</td>' +
+        '<td class="utilidad">' + fmtM(f.utilidadAnio) + '</td>' +
+        '</tr>';
+    }).join('');
+
+    // Barras
+    const max = Math.max.apply(null, r.filas.map((f) => f.utilidadAnio));
+    el('barras').innerHTML = r.filas.map((f) => {
+      const pct = Math.max(12, (f.utilidadAnio / max) * 100);
+      return '<div class="barra-fila">' +
+        '<div class="barra-etq">' + f.n + ' eventos<small>al mes</small></div>' +
+        '<div class="barra-track"><div class="barra-fill" style="width:' + pct.toFixed(1) + '%">' +
+        fmtM(f.utilidadAnio) + ' al año</div></div>' +
+        '</div>';
+    }).join('');
+
+    // Tabla escenario prudente
+    el('tabla-prudente').innerHTML = r.filas.map((f) =>
+      '<tr>' +
+      '<td>' + f.n + '</td>' +
+      '<td>' + (f.refuerzo ? fmtM(f.refuerzo, 0) + '/mes' : '—') + '</td>' +
+      '<td>' + fmtM(f.utilidadAnio) + '</td>' +
+      '<td class="utilidad">' + fmtM(f.utilidadAnioPrudente) + '</td>' +
+      '</tr>'
+    ).join('');
+
+    // Cierre
+    const f10 = r.filas.find((f) => f.n === 10);
+    const f15 = r.filas.find((f) => f.n === 15);
+    el('cierre-10').textContent = fmtM(f10.utilidadAnio);
+    el('cierre-10-neto').textContent = fmtM(f10.utilidadAnio - 50000000);
+    el('cierre-15').textContent = fmtM(f15.utilidadAnio);
+  }
+
+  const slider = el('ticket');
+  slider.addEventListener('input', () => render(parseFloat(slider.value)));
+  render(parseFloat(slider.value));
+})();
+</script>
+
+</body>
+</html>
